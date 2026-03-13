@@ -1,0 +1,703 @@
+/* ==========================================================================
+   1. CSS VARIABLES (PREMIUM COLOR PALETTE & TYPOGRAPHY)
+   ========================================================================== */
+   :root {
+    /* Colors - Light Theme (Typing.com inspired) */
+    --bg-main: #f3f4f6;          /* Light grayish blue background */
+    --bg-card: #ffffff;          /* Pure white for cards */
+    
+    --primary-blue: #2563eb;     /* Vibrant Professional Blue */
+    --primary-blue-hover: #1d4ed8;
+    --primary-blue-light: #eff6ff;
+    
+    --success-green: #10b981;    /* Bright Green for correct typing */
+    --success-bg: #d1fae5;
+    
+    --error-red: #ef4444;        /* Bright Red for mistakes */
+    --error-bg: #fee2e2;
+    --error-dark: #991b1b;       /* For extra wrong characters */
+    
+    --text-main: #1e293b;        /* Very dark blue/gray for main UI text */
+    --text-muted: #64748b;       /* Muted gray for untyped text & labels */
+    --border-color: #e2e8f0;     /* Soft border color */
+    
+    /* Typography */
+    --font-ui: 'Inter', 'Noto Sans Bengali', sans-serif;
+    --font-typing: 'Roboto Mono', monospace;
+    
+    /* Shadows & Effects */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-blue: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
+    
+    /* Border Radius */
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+}
+
+/* ==========================================================================
+   2. GLOBAL RESET & BASE STYLES
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-ui);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Helpers */
+.text-blue { color: var(--primary-blue) !important; }
+.text-green { color: var(--success-green) !important; }
+.text-red { color: var(--error-red) !important; }
+.hidden { display: none !important; opacity: 0; pointer-events: none; }
+
+/* ==========================================================================
+   3. NAVIGATION BAR (Top Header)
+   ========================================================================== */
+.navbar {
+    background-color: var(--bg-card);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: -0.5px;
+}
+
+.brand-icon {
+    color: var(--primary-blue);
+    font-size: 1.8rem;
+}
+
+.brand .highlight {
+    color: var(--primary-blue);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-btn:hover {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+}
+
+.nav-btn.active {
+    background-color: var(--primary-blue-light);
+    color: var(--primary-blue);
+}
+
+.nav-btn.icon-only {
+    padding: 0.5rem;
+    font-size: 1.2rem;
+}
+
+/* ==========================================================================
+   4. MAIN LAYOUT & CONTAINERS
+   ========================================================================== */
+.app-wrapper {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ==========================================================================
+   5. CONFIGURATION CARD (Language & Time)
+   ========================================================================== */
+.config-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1rem 2rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.config-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.config-label {
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-group {
+    display: flex;
+    background: var(--bg-main);
+    padding: 0.3rem;
+    border-radius: var(--radius-md);
+}
+
+.toggle-btn {
+    background: transparent;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    font-family: var(--font-ui);
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-btn:hover {
+    color: var(--text-main);
+}
+
+.toggle-btn.active {
+    background: var(--bg-card);
+    color: var(--primary-blue);
+    box-shadow: var(--shadow-sm);
+    font-weight: 600;
+}
+
+.vertical-divider {
+    width: 2px;
+    height: 30px;
+    background-color: var(--border-color);
+}
+
+/* ==========================================================================
+   6. LIVE STATISTICS BAR
+   ========================================================================== */
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.stat-box {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+}
+
+.speed-icon { color: var(--primary-blue); background: var(--primary-blue-light); }
+.acc-icon { color: var(--success-green); background: var(--success-bg); }
+.time-icon { color: #f59e0b; background: #fef3c7; }
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-title {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.1;
+}
+
+.stat-value small {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   7. THE CORE TYPING INTERFACE (Like Typing.com)
+   ========================================================================== */
+.typing-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+
+#typing-container {
+    position: relative;
+    width: 100%;
+    min-height: 180px;
+}
+
+#hidden-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: -1;
+    cursor: default;
+}
+
+/* Blur Overlay when unfocused */
+#focus-overlay {
+    position: absolute;
+    inset: -10px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(6px);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.overlay-content {
+    background: var(--primary-blue);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: var(--shadow-blue);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Text Display & Words Layout */
+#text-display {
+    position: relative;
+    font-family: var(--font-typing);
+    font-size: 1.8rem; /* Large readable text */
+    line-height: 1.6;
+    height: 140px; /* Show approx 3 lines */
+    overflow: hidden;
+    user-select: none;
+    color: var(--text-muted);
+}
+
+#words {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    transition: filter 0.3s ease;
+}
+
+.word {
+    display: flex;
+    margin: 0 0.6em 0.4em 0;
+    border-bottom: 2px solid transparent;
+}
+
+/* Highlight word if completely wrong (optional visual cue) */
+.word.error {
+    border-bottom-color: var(--error-red);
+}
+
+letter {
+    display: inline-block;
+    position: relative;
+    transition: color 0.1s ease, background-color 0.1s ease;
+    border-radius: 3px;
+}
+
+/* Typing States for Letters */
+letter.correct {
+    color: var(--success-green);
+}
+
+letter.incorrect {
+    color: var(--error-red);
+    background-color: var(--error-bg); /* Slight red background for errors */
+}
+
+letter.extra {
+    color: var(--error-dark);
+    background-color: var(--error-bg);
+}
+
+/* ==========================================================================
+   8. CARET (Text Cursor) & SHAKE ANIMATION
+   ========================================================================== */
+#caret {
+    position: absolute;
+    width: 3px;
+    height: 1.6em;
+    background-color: var(--primary-blue);
+    border-radius: 2px;
+    transition: top 0.1s ease, left 0.1s ease;
+    animation: caretBlink 1s infinite;
+    z-index: 5;
+    box-shadow: 0 0 5px rgba(37, 99, 235, 0.5);
+}
+
+@keyframes caretBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Screen Shake Effect for Mistakes */
+.shake-animation {
+    animation: horizontalShake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes horizontalShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+/* ==========================================================================
+   9. TYPING FOOTER & CONTROLS
+   ========================================================================== */
+.typing-footer {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+}
+
+.hint {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+kbd {
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-main);
+    box-shadow: 0 2px 0 var(--border-color);
+}
+
+.primary-btn {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.primary-btn:hover {
+    background-color: var(--primary-blue-hover);
+    box-shadow: var(--shadow-blue);
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   10. RESULT MODAL & PREMIUM CERTIFICATE SECTION
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: var(--bg-card);
+    width: 90%;
+    max-width: 600px;
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.modal-header h2 {
+    color: var(--text-main);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.modal-header p {
+    color: var(--text-muted);
+}
+
+.final-scores {
+    display: flex;
+    justify-content: space-around;
+    background: var(--bg-main);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    margin-bottom: 2rem;
+}
+
+.score-card {
+    text-align: center;
+}
+
+.score-card h3 {
+    font-size: 1rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.score-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-top: 0.5rem;
+}
+
+.score-number span {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.detailed-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.d-stat {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.d-stat strong {
+    font-size: 1.1rem;
+    margin-left: 5px;
+}
+
+/* Premium Certificate Form */
+.certificate-claim {
+    border: 2px dashed var(--primary-blue);
+    background: var(--primary-blue-light);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.cert-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cert-icon {
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+}
+
+.cert-header h3 {
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.cert-header p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.action-btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-family: var(--font-ui);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.download-btn {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.download-btn:hover {
+    background-color: var(--primary-blue-hover);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.outline-btn {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-main);
+    width: 100%;
+}
+
+.outline-btn:hover {
+    background: var(--bg-main);
+    border-color: var(--text-muted);
+}
+
+/* ==========================================================================
+   11. RESPONSIVE DESIGN (Media Queries)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .stats-bar {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .config-card {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+    .vertical-divider {
+        width: 100%;
+        height: 1px;
+    }
+    #text-display {
+        font-size: 1.4rem;
+        height: 110px;
+    }
+    .input-group {
+        flex-direction: column;
+    }
+    .nav-links .nav-btn span {
+        display: none; /* Hide text on mobile nav */
+    }
+    .typing-footer {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
