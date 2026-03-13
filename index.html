@@ -1,74 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BharatTyping Elite </title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Dancing+Script:wght@700&family=JetBrains+Mono:wght@500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pro Typing Practice</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </head>
-<body class="dark-mode">
-    <div class="container">
-        <div id="main-menu" class="screen">
-            <h1 class="logo">BHARAT<span>TYPING</span></h1>
-            <p>Master the Art of Speed</p>
-            <button class="main-opt" onclick="showLang()">START PRACTICE</button>
-        </div>
 
-        <div id="lang-screen" class="screen hidden">
-            <button class="back-btn" onclick="goBack('main-menu')"> Back</button>
-            <h2>Select Language</h2>
-            <div class="opt-grid">
-                <button onclick="setLang('english')">English (Global)</button>
-                <button onclick="setLang('bengali')">Bengali ()</button>
-                <button onclick="setLang('hindi')">Hindi ()</button>
-            </div>
-        </div>
+<body>
 
-        <div id="time-screen" class="screen hidden">
-            <button class="back-btn" onclick="goBack('lang-screen')"> Back</button>
-            <h2>Duration</h2>
-            <div class="opt-grid">
-                <button onclick="startApp(1)">1 Minute</button>
-                <button onclick="startApp(2)">2 Minutes</button>
-                <button onclick="startApp(5)">5 Minutes</button>
-            </div>
-        </div>
 
-        <div id="typing-screen" class="screen hidden">
-            <div class="stats-bar">
-                <div class="s-box">TIME <span id="timer">01:00</span></div>
-                <div class="s-box">WPM <span id="wpm">0</span></div>
-                <div class="s-box">ACC <span id="acc">100%</span></div>
-            </div>
-            <div id="display-container" onclick="focusInput()">
-                <div id="text-display"></div>
-                <input type="text" id="master-input" autocomplete="off" autofocus>
-            </div>
-            <div class="keyboard-hint">Use Backspace to correct mistakes. Keep typing!</div>
-        </div>
+<div class="container">
 
-        <div id="result-screen" class="screen hidden">
-            <div class="result-header">
-                <h2>Test Completed!</h2>
-                <p>Verify your details for the certificate</p>
-            </div>
-            <div class="result-stats">
-                <div class="r-box">Speed: <b id="res-wpm">0</b> WPM</div>
-                <div class="r-box">Accuracy: <b id="res-acc">0</b>%</div>
-            </div>
-            <input type="text" id="user-name" placeholder="Enter Your Full Name" class="name-input">
-            <div class="action-btns">
-                <button onclick="prepareCertificate()" class="cert-btn">Download Pro Certificate </button>
-                <button onclick="location.reload()" class="retry-btn">Try Again</button>
-            </div>
-        </div>
-    </div>
 
-    <audio id="sfx-key" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
-    <audio id="sfx-error" src="https://assets.mixkit.co/active_storage/sfx/951/951-preview.mp3"></audio>
+<h1 class="logo">Pro Typing Practice</h1>
 
-    <script src="script.js"></script>
+
+
+<!-- SETTINGS -->
+
+<div class="settings">
+
+<select id="language">
+
+<option value="english">English</option>
+<option value="bangla">বাংলা</option>
+<option value="hindi">हिन्दी</option>
+
+</select>
+
+
+<select id="time">
+
+<option value="60">1 Minute</option>
+<option value="180">3 Minutes</option>
+<option value="300">5 Minutes</option>
+
+</select>
+
+
+<button id="startBtn">Start Test</button>
+
+</div>
+
+
+
+<!-- LIVE STATS -->
+
+<div class="stats">
+
+<div class="stat">
+
+<span id="wpm">0</span>
+<p>WPM</p>
+
+</div>
+
+
+<div class="stat">
+
+<span id="accuracy">100</span>
+<p>Accuracy</p>
+
+</div>
+
+
+<div class="stat">
+
+<span id="timer">0</span>
+<p>Time</p>
+
+</div>
+
+
+</div>
+
+
+
+
+<!-- TYPING AREA -->
+
+<div id="typingArea" tabindex="0">
+
+<div id="textDisplay">
+
+Click "Start Test" to begin...
+
+</div>
+
+</div>
+
+
+
+
+<!-- RESULT -->
+
+<div id="resultSection" class="result">
+
+<h2>Typing Result</h2>
+
+<p>Speed: <span id="finalWPM"></span> WPM</p>
+
+<p>Accuracy: <span id="finalAccuracy"></span>%</p>
+
+
+<input id="userName" placeholder="Enter your name for certificate">
+
+
+<button id="downloadCert">Download Certificate</button>
+
+</div>
+
+
+
+</div>
+
+
+
+
+<!-- AUDIO -->
+
+<audio id="keySound"
+src="https://cdn.jsdelivr.net/gh/rohitsathish/key-click@master/key1.mp3"></audio>
+
+<audio id="errorSound"
+src="https://cdn.jsdelivr.net/gh/rohitsathish/key-click@master/key2.mp3"></audio>
+
+
+
+<script src="script.js"></script>
+
 </body>
+
 </html>

@@ -1,144 +1,332 @@
-const DB = {
-    english: [
-        "In the world of technology, speed is efficiency. (High-speed) typing is a skill! @2026 #Coding; Can you type 100% correctly? {Success} is near.",
-        "A quick brown fox jumps over the lazy dog. 1234567890! Symbols like #, $, %, &, *, (, ), _, +, [, ], {, }, |, \, :, ;, \", ', <, >, ?, /, , . are essential for pro typing.",
-        "Computer programming is the process of designing and building an executable computer program to accomplish a specific computing result."
-    ],
-    bengali: [
-        "          #! ' '   ()    !",
-        "         @Ayan;         ?   "
-    ]
-};
+// ELEMENTS
 
-let lang = 'english', time = 60, timer = null, idx = 0, mistakes = 0, active = false;
-let currentText = "";
+const startBtn = document.getElementById("startBtn")
+const textDisplay = document.getElementById("textDisplay")
+const typingArea = document.getElementById("typingArea")
 
-function setLang(l) { lang = l; goBack('time-screen'); }
+const wpmText = document.getElementById("wpm")
+const accuracyText = document.getElementById("accuracy")
+const timerText = document.getElementById("timer")
 
-function startApp(m) {
-    time = m * 60;
-    goBack('typing-screen');
-    render();
+const resultSection = document.getElementById("resultSection")
+const finalWPM = document.getElementById("finalWPM")
+const finalAccuracy = document.getElementById("finalAccuracy")
+
+const languageSelect = document.getElementById("language")
+const timeSelect = document.getElementById("time")
+
+const keySound = document.getElementById("keySound")
+const errorSound = document.getElementById("errorSound")
+
+const downloadBtn = document.getElementById("downloadCert")
+
+
+// WORD DATABASE
+
+const words = {
+
+english:[
+"keyboard","typing","practice","computer","screen","speed","accuracy","lesson","random","focus",
+"method","monitor","technology","internet","development","javascript","programming","software",
+"hardware","system","performance","professional","creative","learning","challenge","solution",
+"engineer","design","modern","education","training","productivity","workflow","typingtest",
+"improvement","exercise","efficiency","communication","knowledge","experience"
+],
+
+bangla:[
+"কম্পিউটার","টাইপিং","অনুশীলন","গতি","নির্ভুলতা","শিক্ষা","প্রযুক্তি","ইন্টারনেট",
+"কীবোর্ড","স্ক্রিন","কাজ","অভ্যাস","দক্ষতা","উন্নতি","কমিউনিকেশন","সফটওয়্যার",
+"হার্ডওয়্যার","প্রোগ্রাম","ডেভেলপমেন্ট","শেখা","সমাধান","অভিজ্ঞতা","চ্যালেঞ্জ"
+],
+
+hindi:[
+"कंप्यूटर","टाइपिंग","अभ्यास","गति","सटीकता","कीबोर्ड","स्क्रीन","तकनीक",
+"इंटरनेट","सीखना","विकास","प्रोग्राम","सिस्टम","ज्ञान","अनुभव","समाधान",
+"चुनौती","शिक्षा","कार्य","संचार"
+]
+
 }
 
-function render() {
-    const list = DB[lang];
-    currentText = list[Math.floor(Math.random() * list.length)]; // Random Paragraph
-    document.getElementById('text-display').innerHTML = currentText.split('').map(c => `<span>${c}</span>`).join('');
-    document.getElementById('text-display').children[0].classList.add('current');
-    document.getElementById('master-input').value = "";
-    idx = 0; mistakes = 0; active = false;
-    setTimeout(() => document.getElementById('master-input').focus(), 500);
+
+
+// VARIABLES
+
+let charIndex = 0
+let mistakes = 0
+let timer = null
+let timeLeft = 0
+let started = false
+
+
+
+// GENERATE PARAGRAPH
+
+function generateParagraph(){
+
+let wordsNeeded = 50
+
+if(timeSelect.value == "180") wordsNeeded = 150
+if(timeSelect.value == "300") wordsNeeded = 250
+
+const lang = languageSelect.value
+const list = words[lang]
+
+let paragraph = []
+
+for(let i=0;i<wordsNeeded;i++){
+
+const random = list[Math.floor(Math.random()*list.length)]
+
+paragraph.push(random)
+
 }
 
-function focusInput() { document.getElementById('master-input').focus(); }
+return paragraph.join(" ")
 
-document.getElementById('master-input').addEventListener('input', (e) => {
-    if (!active) startTimer();
-    const spans = document.getElementById('text-display').querySelectorAll('span');
-    const typed = document.getElementById('master-input').value.split('');
-
-    if (e.inputType === "deleteContentBackward") {
-        if (idx > 0) {
-            idx--;
-            spans[idx].className = '';
-        }
-    } else {
-        const char = typed[typed.length - 1];
-        if (idx < spans.length) {
-            if (char === spans[idx].innerText) {
-                spans[idx].className = 'correct';
-                new Audio(document.getElementById('sfx-key').src).play();
-            } else {
-                spans[idx].className = 'wrong';
-                mistakes++;
-                new Audio(document.getElementById('sfx-error').src).play();
-            }
-            idx++;
-        }
-    }
-
-    spans.forEach(s => s.classList.remove('current'));
-    if (spans[idx]) spans[idx].classList.add('current');
-    
-    // Auto-scroll if text is long
-    if(idx > 20) spans[idx].scrollIntoView({behavior: "smooth", block: "center"});
-    
-    updateStats();
-    if (idx === spans.length) end();
-});
-
-function startTimer() {
-    active = true;
-    let left = time;
-    timer = setInterval(() => {
-        left--;
-        let m = Math.floor(left/60), s = left%60;
-        document.getElementById('timer').innerText = `${m}:${s<10?'0'+s:s}`;
-        if (left <= 0) end();
-    }, 1000);
 }
 
-function updateStats() {
-    let wpm = Math.round((idx / 5) / ((time - getLeftTime()) / 60) || 0);
-    document.getElementById('wpm').innerText = wpm;
-    document.getElementById('acc').innerText = Math.round(((idx - mistakes) / idx) * 100 || 100) + "%";
+
+
+// LOAD TEXT
+
+function loadText(){
+
+const text = generateParagraph()
+
+textDisplay.innerHTML = ""
+
+text.split("").forEach(char=>{
+
+const span = document.createElement("span")
+span.innerText = char
+
+textDisplay.appendChild(span)
+
+})
+
+textDisplay.querySelector("span").classList.add("current")
+
 }
 
-function getLeftTime() {
-    const t = document.getElementById('timer').innerText.split(':');
-    return parseInt(t[0]) * 60 + parseInt(t[1]);
+
+
+// START TEST
+
+startBtn.addEventListener("click",()=>{
+
+loadText()
+
+charIndex = 0
+mistakes = 0
+
+timeLeft = parseInt(timeSelect.value)
+
+timerText.innerText = timeLeft
+
+wpmText.innerText = 0
+accuracyText.innerText = 100
+
+started = true
+
+resultSection.style.display = "none"
+
+typingArea.focus()
+
+clearInterval(timer)
+
+timer = setInterval(updateTimer,1000)
+
+})
+
+
+
+
+// TIMER
+
+function updateTimer(){
+
+if(timeLeft>0){
+
+timeLeft--
+timerText.innerText = timeLeft
+
+}else{
+
+finishTest()
+
 }
 
-function end() {
-    clearInterval(timer);
-    goBack('result-screen');
-    document.getElementById('res-wpm').innerText = document.getElementById('wpm').innerText;
-    document.getElementById('res-acc').innerText = document.getElementById('acc').innerText.replace('%','');
 }
 
-function prepareCertificate() {
-    const name = document.getElementById('user-name').value;
-    if (!name) { alert("Please enter your name first!"); return; }
-    
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('l', 'mm', 'a4');
 
-    // Design
-    doc.setDrawColor(212, 175, 55); doc.setLineWidth(5); doc.rect(5, 5, 287, 200); // Border
-    doc.setLineWidth(1); doc.rect(10, 10, 277, 190); 
 
-    // Header
-    doc.setFont("Cinzel", "bold"); doc.setFontSize(40); doc.setTextColor(184, 134, 11);
-    doc.text("CERTIFICATE OF ACHIEVEMENT", 148, 40, {align: 'center'});
+// KEY TYPING
 
-    doc.setFont("Poppins", "normal"); doc.setFontSize(15); doc.setTextColor(0);
-    doc.text("This is to certify that", 148, 60, {align: 'center'});
+document.addEventListener("keydown",(e)=>{
 
-    // User Name
-    doc.setFont("Dancing Script", "bold"); doc.setFontSize(50); doc.setTextColor(0);
-    doc.text(name, 148, 85, {align: 'center'});
+if(!started) return
 
-    // Body
-    doc.setFont("Poppins", "normal"); doc.setFontSize(18);
-    doc.text("has successfully completed the Professional Typing Speed Test", 148, 110, {align: 'center'});
-    doc.text(`with an impressive speed of ${document.getElementById('res-wpm').innerText} WPM`, 148, 125, {align: 'center'});
-    doc.text(`and an Accuracy of ${document.getElementById('res-acc').innerText}%`, 148, 135, {align: 'center'});
+const characters = textDisplay.querySelectorAll("span")
 
-    // Signatures
-    doc.setDrawColor(0); doc.line(50, 170, 110, 170); doc.line(180, 170, 240, 170);
-    doc.setFont("Dancing Script", "bold"); doc.setFontSize(20);
-    doc.text("Ayan Karmakar", 80, 165, {align: 'center'}); 
-    doc.text("BharatTyping Org.", 210, 165, {align: 'center'});
+if(e.key === "Backspace"){
 
-    doc.setFont("Poppins", "bold"); doc.setFontSize(12);
-    doc.text("CEO & Founder", 80, 175, {align: 'center'});
-    doc.text("Authorized Signatory", 210, 175, {align: 'center'});
+if(charIndex>0){
 
-    doc.save(`${name}_Typing_Certificate.pdf`);
+charIndex--
+
+characters[charIndex].classList.remove("correct","wrong")
+
 }
 
-function goBack(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-    document.getElementById(id).classList.remove('hidden');
+return
+
 }
+
+
+
+if(charIndex < characters.length){
+
+const currentChar = characters[charIndex]
+
+if(e.key === currentChar.innerText){
+
+currentChar.classList.add("correct")
+
+keySound.currentTime=0
+keySound.play()
+
+}else{
+
+currentChar.classList.add("wrong")
+
+mistakes++
+
+errorSound.currentTime=0
+errorSound.play()
+
+if(navigator.vibrate){
+
+navigator.vibrate(100)
+
+}
+
+}
+
+currentChar.classList.remove("current")
+
+charIndex++
+
+if(charIndex < characters.length){
+
+characters[charIndex].classList.add("current")
+
+}
+
+updateStats()
+
+}
+
+})
+
+
+
+
+// UPDATE STATS
+
+function updateStats(){
+
+const typed = charIndex
+const correct = typed - mistakes
+
+const minutes = (parseInt(timeSelect.value)-timeLeft)/60
+
+let wpm = 0
+
+if(minutes>0){
+
+wpm = Math.round((correct/5)/minutes)
+
+}
+
+let accuracy = 0
+
+if(typed>0){
+
+accuracy = Math.round((correct/typed)*100)
+
+}
+
+wpmText.innerText = wpm
+accuracyText.innerText = accuracy
+
+}
+
+
+
+
+// FINISH TEST
+
+function finishTest(){
+
+clearInterval(timer)
+
+started = false
+
+resultSection.style.display = "block"
+
+finalWPM.innerText = wpmText.innerText
+finalAccuracy.innerText = accuracyText.innerText
+
+}
+
+
+
+// CERTIFICATE
+
+downloadBtn.addEventListener("click",()=>{
+
+const name = document.getElementById("userName").value
+
+if(name===""){
+
+alert("Enter your name first")
+return
+
+}
+
+const { jsPDF } = window.jspdf
+
+const doc = new jsPDF()
+
+doc.setFillColor(255,255,255)
+doc.rect(0,0,210,297,"F")
+
+doc.setDrawColor(0)
+doc.rect(10,10,190,277)
+
+doc.setFontSize(28)
+doc.text("Typing Achievement Certificate",35,60)
+
+doc.setFontSize(16)
+doc.text("This certificate is proudly presented to",55,90)
+
+doc.setFontSize(24)
+doc.text(name,80,110)
+
+doc.setFontSize(16)
+doc.text("for successfully completing the typing test",50,130)
+
+doc.text("Typing Speed: "+finalWPM.innerText+" WPM",70,160)
+doc.text("Accuracy: "+finalAccuracy.innerText+" %",80,175)
+
+doc.text("Authorized Signature:",20,230)
+
+doc.setFontSize(18)
+doc.text("Ayan Karmakar",20,245)
+
+doc.setFontSize(12)
+doc.text("Pro Typing Practice Institute",140,260)
+
+doc.save("Typing_Certificate.pdf")
+
+})

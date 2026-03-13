@@ -1,44 +1,288 @@
-:root {
-    --gold: #d4af37; --bg: #0a0a0c; --card: #15151a;
-    --text: #e0e0e0; --primary: #007bff;
-}
-body {
-    margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg);
-    color: var(--text); display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden;
-}
-.screen {
-    background: var(--card); padding: 40px; border-radius: 20px; text-align: center;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.8); border: 1px solid #333; width: 850px;
-}
-.hidden { display: none !important; }
-.logo { font-family: 'Cinzel', serif; font-size: 3rem; letter-spacing: 5px; color: var(--gold); }
-.logo span { color: #fff; }
+/* RESET */
 
-/* Typing Area */
-#display-container {
-    background: #000; padding: 30px; border-radius: 15px; margin-top: 20px;
-    min-height: 250px; border: 2px solid #444; position: relative; cursor: text;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
-#text-display {
-    font-family: 'JetBrains Mono', monospace; font-size: 1.6rem;
-    line-height: 2; text-align: left; color: #666; transition: 0.1s;
-}
-#master-input { position: absolute; opacity: 0; pointer-events: none; }
 
-.correct { color: #fff; }
-.wrong { color: #ff4d4d; background: rgba(255, 77, 77, 0.2); border-radius: 4px; }
-.current { border-bottom: 3px solid var(--gold); background: rgba(212, 175, 55, 0.1); }
 
-/* Stats & Inputs */
-.stats-bar { display: flex; justify-content: space-between; margin-bottom: 15px; }
-.s-box { background: #222; padding: 10px 20px; border-radius: 10px; font-weight: bold; border-bottom: 3px solid var(--gold); }
-.name-input {
-    width: 80%; padding: 15px; margin: 20px 0; border-radius: 10px;
-    border: 1px solid var(--gold); background: transparent; color: #fff; font-size: 1.2rem; text-align: center;
+/* BODY */
+
+body{
+
+background:#0f1117;
+color:#ffffff;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:20px;
+
 }
-.cert-btn { background: var(--gold) !important; color: #000 !important; }
-button {
-    padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer;
-    font-weight: bold; background: #333; color: #fff; transition: 0.3s; margin: 5px;
+
+
+
+/* CONTAINER */
+
+.container{
+
+max-width:950px;
+width:100%;
+text-align:center;
+
 }
-button:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); }
+
+
+
+/* LOGO */
+
+.logo{
+
+font-size:32px;
+font-weight:600;
+color:#f5c542;
+margin-bottom:25px;
+
+}
+
+
+
+/* SETTINGS */
+
+.settings{
+
+display:flex;
+justify-content:center;
+gap:10px;
+margin-bottom:25px;
+flex-wrap:wrap;
+
+}
+
+
+.settings select,
+.settings button{
+
+padding:10px 15px;
+border:none;
+border-radius:6px;
+font-size:15px;
+
+}
+
+
+.settings select{
+
+background:#1b1f2a;
+color:white;
+
+}
+
+
+.settings button{
+
+background:#f5c542;
+font-weight:500;
+cursor:pointer;
+
+}
+
+
+.settings button:hover{
+
+background:#ffd95e;
+
+}
+
+
+
+
+/* STATS */
+
+.stats{
+
+display:flex;
+justify-content:center;
+gap:40px;
+margin-bottom:25px;
+
+}
+
+
+.stat{
+
+background:#1b1f2a;
+padding:12px 25px;
+border-radius:8px;
+
+}
+
+
+.stat span{
+
+font-size:22px;
+font-weight:600;
+color:#f5c542;
+
+}
+
+
+.stat p{
+
+font-size:13px;
+opacity:.7;
+
+}
+
+
+
+
+/* TYPING AREA */
+
+#typingArea{
+
+background:#1b1f2a;
+padding:30px;
+border-radius:10px;
+text-align:left;
+min-height:140px;
+cursor:text;
+
+}
+
+
+
+/* PARAGRAPH */
+
+#textDisplay{
+
+font-size:20px;
+line-height:1.8;
+color:#9aa0a6;
+word-wrap:break-word;
+
+}
+
+
+
+/* CHARACTER STYLES */
+
+#textDisplay span{
+
+position:relative;
+
+}
+
+
+
+/* CORRECT */
+
+.correct{
+
+color:#ffffff;
+
+}
+
+
+
+/* WRONG */
+
+.wrong{
+
+color:#ff4d4d;
+background:rgba(255,0,0,0.15);
+border-radius:3px;
+
+}
+
+
+
+/* CURRENT CURSOR */
+
+.current{
+
+border-bottom:3px solid #f5c542;
+
+}
+
+
+
+/* RESULT */
+
+.result{
+
+margin-top:30px;
+background:#1b1f2a;
+padding:25px;
+border-radius:10px;
+display:none;
+
+}
+
+
+.result h2{
+
+margin-bottom:15px;
+
+}
+
+
+
+.result input{
+
+width:100%;
+padding:10px;
+margin:15px 0;
+background:#0f1117;
+border:none;
+border-radius:6px;
+color:white;
+
+}
+
+
+
+.result button{
+
+padding:12px 18px;
+background:#f5c542;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:500;
+
+}
+
+
+.result button:hover{
+
+background:#ffd95e;
+
+}
+
+
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+.logo{
+font-size:24px;
+}
+
+.stats{
+gap:20px;
+}
+
+#textDisplay{
+font-size:17px;
+}
+
+#typingArea{
+padding:20px;
+}
+
+}
