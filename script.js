@@ -1,79 +1,49 @@
-// ==========================================================================
-// 1. PREMIUM PARAGRAPH BANKS (Meaningful text for true typing practice)
-// ==========================================================================
 const textDatabase = {
     en: [
-        "Technology has revolutionized the way we live, work, and communicate. From the invention of the printing press to the rise of the internet, human progress has been driven by innovation. In today's digital age, mastering keyboard skills is not just an advantage; it is a fundamental necessity for almost every professional career.",
-        "Nature is a complex and beautiful system where every living organism plays a vital role. The lush green forests, deep blue oceans, and soaring mountains are all interconnected. Protecting our environment is crucial for the survival of future generations. We must adopt sustainable practices to preserve the delicate balance of our ecosystem.",
-        "Success is not final, and failure is not fatal. It is the courage to continue that truly counts. Many great leaders faced countless rejections before achieving their dreams. Hard work, dedication, and a positive mindset can turn any obstacle into an opportunity. Keep pushing your limits, and eventually, you will reach your ultimate goals."
+        "Technology has revolutionized the way we live and work. From the invention of the printing press to the rise of the internet.",
+        "Nature is a complex and beautiful system where every living organism plays a vital role. The lush green forests are amazing.",
+        "Success is not final, and failure is not fatal. It is the courage to continue that truly counts in the modern world.",
+        "Programming is the art of giving instructions to computers to solve complex problems logically and efficiently.",
+        "The universe is vast and expanding, filled with billions of galaxies, stars, and mysteries yet to be discovered."
     ],
     bn: [
-        "প্রযুক্তি আমাদের জীবন, কাজ এবং যোগাযোগের মাধ্যমকে পুরোপুরি বদলে দিয়েছে। মুদ্রণযন্ত্রের আবিষ্কার থেকে শুরু করে ইন্টারনেটের উত্থান—মানুষের অগ্রগতি সর্বদা উদ্ভাবনের ওপর নির্ভরশীল। বর্তমান ডিজিটাল যুগে কীবোর্ডের দক্ষতা অর্জন করা কেবল কোনো সুবিধা নয়; বরং এটি প্রায় প্রতিটি পেশাগত ক্যারিয়ারের জন্য একটি মৌলিক প্রয়োজনীয়তা।",
-        "প্রকৃতি এক অপরূপ ও জটিল ব্যবস্থা যেখানে প্রতিটি জীবের একটি গুরুত্বপূর্ণ ভূমিকা রয়েছে। সবুজ বনভূমি, গভীর নীল মহাসাগর এবং বিশাল পর্বতমালা সবই একে অপরের সাথে সংযুক্ত। ভবিষ্যৎ প্রজন্মের অস্তিত্ব রক্ষার জন্য পরিবেশ সংরক্ষণ করা অত্যন্ত জরুরি। বাস্তুতন্ত্রের ভারসাম্য বজায় রাখতে আমাদের অবশ্যই টেকসই পদ্ধতি গ্রহণ করতে হবে।",
-        "সাফল্য মানেই শেষ নয়, আর ব্যর্থতা মানেই ধ্বংস নয়। সামনে এগিয়ে যাওয়ার সাহসটাই হলো আসল কথা। অনেক বড় বড় নেতা তাদের স্বপ্ন পূরণের আগে অসংখ্যবার প্রত্যাখ্যাত হয়েছেন। কঠোর পরিশ্রম, নিষ্ঠা এবং ইতিবাচক মানসিকতা যেকোনো বাধাকে সুযোগে পরিণত করতে পারে। নিজের সীমানাকে ছাড়িয়ে যাওয়ার চেষ্টা করুন, একদিন ঠিকই লক্ষ্যে পৌঁছাবেন।"
+        "প্রযুক্তি আমাদের জীবন এবং কাজকে পুরোপুরি বদলে দিয়েছে। মুদ্রণযন্ত্রের আবিষ্কার থেকে শুরু করে ইন্টারনেটের উত্থান অভাবনীয়।",
+        "প্রকৃতি এক অপরূপ ব্যবস্থা যেখানে প্রতিটি জীবের একটি গুরুত্বপূর্ণ ভূমিকা রয়েছে। সবুজ বনভূমি, মহাসাগর সবই একে অপরের সাথে সংযুক্ত।",
+        "সাফল্য মানেই শেষ নয়, আর ব্যর্থতা মানেই ধ্বংস নয়। সামনে এগিয়ে যাওয়ার সাহসটাই হলো আসল কথা।",
+        "কঠোর পরিশ্রম, নিষ্ঠা এবং ইতিবাচক মানসিকতা যেকোনো বাধাকে সুযোগে পরিণত করতে পারে। নিজের সীমানাকে ছাড়িয়ে যাওয়ার চেষ্টা করুন।",
+        "বাংলাদেশ নদীমাতৃক দেশ। এখানকার প্রাকৃতিক সৌন্দর্য এবং মানুষের সহজ সরল জীবনযাত্রা সত্যিই মনোমুগ্ধকর।"
     ],
     hi: [
-        "प्रौद्योगिकी ने हमारे जीने, काम करने और संवाद करने के तरीके में पूरी तरह से क्रांति ला दी है। प्रिंटिंग प्रेस के आविष्कार से लेकर इंटरनेट के उदय तक, मानव प्रगति हमेशा नवाचार से प्रेरित रही है। आज के डिजिटल युग में, कीबोर्ड कौशल में महारत हासिल करना सिर्फ एक फायदा नहीं है; यह लगभग हर पेशेवर करियर के लिए एक बुनियादी आवश्यकता है।",
-        "प्रकृति एक सुंदर और जटिल प्रणाली है जहां हर जीवित जीव एक महत्वपूर्ण भूमिका निभाता है। हरे-भरे जंगल, गहरे नीले महासागर और ऊंचे पहाड़ सभी आपस में जुड़े हुए हैं। आने वाली पीढ़ियों के अस्तित्व के लिए हमारे पर्यावरण की रक्षा करना बहुत महत्वपूर्ण है। हमें अपने पारिस्थितिकी तंत्र के नाजुक संतुलन को बनाए रखने के लिए स्थायी प्रथाओं को अपनाना चाहिए।",
-        "सफलता अंतिम नहीं है, और असफलता घातक नहीं है। यह जारी रखने का साहस है जो वास्तव में मायने रखता है। कई महान नेताओं ने अपने सपनों को हासिल करने से पहले अनगिनत अस्वीकृतियों का सामना किया। कड़ी मेहनत, समर्पण और एक सकारात्मक मानसिकता किसी भी बाधा को अवसर में बदल सकती है। अपनी सीमाओं को आगे बढ़ाते रहें, और अंततः, आप अपने लक्ष्यों तक पहुंच जाएंगे।"
+        "प्रौद्योगिकी ने हमारे जीने और काम करने के तरीके में पूरी तरह से क्रांति ला दी है। इंटरनेट का उदय इसका प्रमाण है।",
+        "प्रकृति एक सुंदर प्रणाली है जहां हर जीवित जीव एक महत्वपूर्ण भूमिका निभाता है। हरे-भरे जंगल बहुत ही आकर्षक हैं।",
+        "सफलता अंतिम नहीं है, और असफलता घातक नहीं है। यह जारी रखने का साहस है जो वास्तव में मायने रखता है।",
+        "कड़ी मेहनत, समर्पण और सकारात्मक मानसिकता किसी भी बाधा को अवसर में बदल सकती है। हमेशा आगे बढ़ते रहें।",
+        "भारत एक विशाल और विविध देश है, जहां विभिन्न संस्कृतियां, भाषाएं और परंपराएं एक साथ निवास करती हैं।"
     ]
 };
 
-// ==========================================================================
-// 2. GLOBAL STATE VARIABLES
-// ==========================================================================
-let currentLang = 'en';
-let selectedTime = 180; // 3 mins default
-let timeRemaining = 180;
-let timerInterval = null;
-let isTyping = false;
+let currentLang = 'en', selectedTime = 180, timeRemaining = 180;
+let timerInterval = null, isTyping = false;
+let wordsArray = [], activeWordIndex = 0;
+let stats = { correctStrokes: 0, wrongStrokes: 0, totalTyped: 0 };
 
-let wordsArray = [];
-let activeWordIndex = 0;
-let activeCharIndex = 0;
-
-let stats = {
-    correctStrokes: 0,
-    wrongStrokes: 0,
-    extraStrokes: 0,
-    missedStrokes: 0,
-    totalTyped: 0
-};
-
-// DOM Elements
 const textDisplay = document.getElementById('words');
 const hiddenInput = document.getElementById('hidden-input');
-const caret = document.getElementById('caret');
 const focusOverlay = document.getElementById('focus-overlay');
-const typingContainer = document.getElementById('typing-container');
-const timerDisplay = document.getElementById('timer');
 const liveWpmDisplay = document.getElementById('live-wpm');
 const liveAccDisplay = document.getElementById('live-acc');
-
-// Audio Objects
-const typeSound = document.getElementById('sound-type');
+const timerDisplay = document.getElementById('timer');
 const errorSound = document.getElementById('sound-error');
-
-// ==========================================================================
-// 3. INITIALIZATION & TEXT GENERATION
-// ==========================================================================
-function shuffleArray(array) {
-    return array.sort(() => Math.random() - 0.5);
-}
 
 function generateText() {
     wordsArray = [];
-    const paragraphs = textDatabase[currentLang];
-    let fullText = "";
-
-    // Build enough text based on time limits (Combine paragraphs)
-    let neededLength = selectedTime === 60 ? 1 : (selectedTime === 180 ? 2 : 3);
-    for(let i=0; i<neededLength; i++) {
-        fullText += paragraphs[i % paragraphs.length] + " ";
-    }
+    let paragraphs = [...textDatabase[currentLang]];
+    paragraphs.sort(() => Math.random() - 0.5); // Randomize
+    let fullText = paragraphs.join(" ");
+    let words = fullText.split(/\s+/);
     
-    // Split into words
-    wordsArray = fullText.trim().split(" ");
+    let wordCount = selectedTime === 60 ? 40 : (selectedTime === 180 ? 120 : 220);
+    wordsArray = words.slice(0, wordCount);
 }
 
 function renderText() {
@@ -81,36 +51,25 @@ function renderText() {
     wordsArray.forEach((word) => {
         const wordDiv = document.createElement('div');
         wordDiv.className = 'word';
-        // Add letters
-        word.split('').forEach(char => {
-            const letterTag = document.createElement('letter');
-            letterTag.innerText = char;
-            wordDiv.appendChild(letterTag);
-        });
+        wordDiv.innerHTML = `<span class="untyped">${word}</span>`;
         textDisplay.appendChild(wordDiv);
     });
-    
     activeWordIndex = 0;
-    activeCharIndex = 0;
-    updateCaretPosition();
+    updateActiveWordVisuals();
 }
 
 function initGame() {
     clearInterval(timerInterval);
     isTyping = false;
     timeRemaining = selectedTime;
-    
-    // Reset UI
     timerDisplay.innerText = formatTime(timeRemaining);
     liveWpmDisplay.innerHTML = `0 <small>WPM</small>`;
     liveAccDisplay.innerHTML = `100<small>%</small>`;
     hiddenInput.value = '';
-    
-    stats = { correctStrokes: 0, wrongStrokes: 0, extraStrokes: 0, missedStrokes: 0, totalTyped: 0 };
+    stats = { correctStrokes: 0, wrongStrokes: 0, totalTyped: 0 };
     
     generateText();
     renderText();
-    
     document.getElementById('result-modal').classList.add('hidden');
     focusInput();
 }
@@ -121,244 +80,137 @@ function formatTime(seconds) {
     return `${m}:${s < 10 ? '0' : ''}${s}`;
 }
 
-// ==========================================================================
-// 4. FOCUS, CARET & SCROLL LOGIC
-// ==========================================================================
 function focusInput() {
     hiddenInput.focus();
     focusOverlay.style.opacity = '0';
     setTimeout(() => focusOverlay.style.display = 'none', 300);
-    textDisplay.classList.remove('unfocused');
-    caret.classList.remove('hidden');
 }
+focusOverlay.addEventListener('click', focusInput);
+document.getElementById('typing-container').addEventListener('click', focusInput);
 
-function blurInput() {
-    focusOverlay.style.display = 'flex';
-    setTimeout(() => focusOverlay.style.opacity = '1', 10);
-    textDisplay.classList.add('unfocused');
-    caret.classList.add('hidden');
-}
-
-function updateCaretPosition() {
-    const words = document.querySelectorAll('.word');
-    if (!words[activeWordIndex]) return;
+// MOBILE AND PC HYBRID TYPING ENGINE (Protects Bengali Conjuncts)
+hiddenInput.addEventListener('input', (e) => {
+    if(!isTyping) startTimer();
     
-    const activeWord = words[activeWordIndex];
-    const letters = activeWord.querySelectorAll('letter');
-    let target;
-    
-    if (activeCharIndex < letters.length) {
-        target = letters[activeCharIndex];
-        caret.style.left = target.offsetLeft + 'px';
-        caret.style.top = target.offsetTop + 'px';
-    } else {
-        target = letters[letters.length - 1];
-        caret.style.left = (target.offsetLeft + target.offsetWidth) + 'px';
-        caret.style.top = target.offsetTop + 'px';
-    }
-    
-    // Premium Auto-Scroll Mechanism
-    const textDisplayArea = document.getElementById('text-display');
-    const caretTop = parseInt(caret.style.top);
-    
-    if (caretTop > 70) { 
-        // Scroll up smoothly
-        textDisplayArea.style.transform = `translateY(-${caretTop - 8}px)`;
-    } else {
-        textDisplayArea.style.transform = `translateY(0px)`;
-    }
-}
+    let typedVal = hiddenInput.value;
 
-// ==========================================================================
-// 5. THE CORE TYPING ENGINE (Includes 100% working Backspace)
-// ==========================================================================
-hiddenInput.addEventListener('keydown', (e) => {
-    if(!isTyping && e.key !== 'Tab') startTimer();
-
-    const words = document.querySelectorAll('.word');
-    const activeWord = words[activeWordIndex];
-    if(!activeWord) return;
-    const letters = activeWord.querySelectorAll('letter');
-
-    // Handle Backspace (100% Accurate Logic)
-    if (e.key === 'Backspace') {
-        e.preventDefault();
+    // Spacebar check for moving to next word
+    if (typedVal.endsWith(' ')) {
+        const activeWordEl = document.querySelectorAll('.word')[activeWordIndex];
+        const targetWord = wordsArray[activeWordIndex];
         
-        if (activeCharIndex > 0) {
-            // Delete character in current word
-            activeCharIndex--;
-            const letterToRemove = letters[activeCharIndex];
-            
-            if (letterToRemove.classList.contains('extra')) {
-                letterToRemove.remove();
-                stats.extraStrokes--;
-            } else {
-                if(letterToRemove.classList.contains('incorrect')) stats.wrongStrokes--;
-                if(letterToRemove.classList.contains('correct')) stats.correctStrokes--;
-                letterToRemove.className = ''; // reset
-            }
-        } else if (activeWordIndex > 0) {
-            // Go back to previous word
-            activeWordIndex--;
-            const prevWord = words[activeWordIndex];
-            prevWord.classList.remove('error'); // remove error underline
-            
-            const prevLetters = prevWord.querySelectorAll('letter');
-            activeCharIndex = prevLetters.length;
-            
-            // Re-adjust char index to the last typed character
-            while(activeCharIndex > 0) {
-                let pLetter = prevLetters[activeCharIndex - 1];
-                if(!pLetter.classList.contains('correct') && !pLetter.classList.contains('incorrect') && !pLetter.classList.contains('extra')) {
-                    activeCharIndex--;
-                } else {
-                    break;
-                }
-            }
-        }
-        updateCaretPosition();
-        calculateLiveStats();
-        return;
-    }
-
-    // Handle Spacebar (Next Word)
-    if (e.key === ' ') {
-        e.preventDefault();
-        
-        // Mark missed letters if word is skipped
-        if(activeCharIndex < letters.length) {
-            activeWord.classList.add('error');
-            stats.missedStrokes += (letters.length - activeCharIndex);
+        let typedWord = typedVal.trim();
+        if(typedWord !== targetWord) {
+            activeWordEl.classList.add('error'); // Underline if word is wrong
         }
         
         activeWordIndex++;
-        activeCharIndex = 0;
+        hiddenInput.value = ''; // Reset for next word
         
         if (activeWordIndex >= wordsArray.length) {
-            endGame(); // Finished all text
+            endGame(); 
         } else {
-            updateCaretPosition();
+            updateActiveWordVisuals();
+            // Scroll down automatically
+            const activeEl = document.querySelectorAll('.word')[activeWordIndex];
+            activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
         return;
     }
 
-    // Handle normal character typing (Ignore Meta, Ctrl, Alt keys)
-    if (e.key.length === 1) {
-        e.preventDefault();
-        stats.totalTyped++;
-        
-        if (activeCharIndex < letters.length) {
-            const expectedChar = letters[activeCharIndex].innerText;
-            if (e.key === expectedChar) {
-                letters[activeCharIndex].classList.add('correct');
-                stats.correctStrokes++;
-                playSound(typeSound);
-            } else {
-                letters[activeCharIndex].classList.add('incorrect');
-                stats.wrongStrokes++;
-                triggerShake();
-            }
-            activeCharIndex++;
-        } else {
-            // Extra characters typed over the word limit
-            const extraTag = document.createElement('letter');
-            extraTag.innerText = e.key;
-            extraTag.classList.add('extra');
-            activeWord.appendChild(extraTag);
-            stats.extraStrokes++;
-            activeCharIndex++;
-            triggerShake();
-        }
-        
-        updateCaretPosition();
-        calculateLiveStats();
-    }
+    updateActiveWordVisuals();
+    calculateStats();
 });
 
+function updateActiveWordVisuals() {
+    const wordElements = document.querySelectorAll('.word');
+    wordElements.forEach(el => el.classList.remove('active'));
+    
+    if(!wordElements[activeWordIndex]) return;
+    
+    const activeWordEl = wordElements[activeWordIndex];
+    activeWordEl.classList.add('active');
+    
+    const targetWord = wordsArray[activeWordIndex];
+    const typedVal = hiddenInput.value;
+
+    let matchLen = 0;
+    for(let i=0; i<typedVal.length; i++){
+        if(typedVal[i] === targetWord[i]) matchLen++;
+        else break;
+    }
+
+    let correctStr = typedVal.substring(0, matchLen);
+    let wrongStr = typedVal.substring(matchLen);
+    let untypedStr = targetWord.substring(matchLen + wrongStr.length);
+
+    let html = '';
+    if (correctStr) html += `<span class="correct">${correctStr}</span>`;
+    if (wrongStr) {
+        html += `<span class="incorrect">${wrongStr}</span>`;
+        triggerShake(); // Vibrate screen on error
+    }
+    if (untypedStr) html += `<span class="untyped">${untypedStr}</span>`;
+
+    activeWordEl.innerHTML = html;
+}
+
 function triggerShake() {
-    playSound(errorSound);
+    errorSound.currentTime = 0;
+    errorSound.play().catch(()=>{});
     const container = document.querySelector('.typing-card');
     container.classList.remove('shake-animation');
-    void container.offsetWidth; // Reflow trick
+    void container.offsetWidth; 
     container.classList.add('shake-animation');
+    stats.wrongStrokes++;
 }
 
-function playSound(audioEl) {
-    audioEl.currentTime = 0;
-    audioEl.play().catch(()=>{});
-}
-
-// ==========================================================================
-// 6. TIMER & STATISTICS CALCULATOR
-// ==========================================================================
 function startTimer() {
     isTyping = true;
     timerInterval = setInterval(() => {
         timeRemaining--;
         timerDisplay.innerText = formatTime(timeRemaining);
-        calculateLiveStats();
-        
-        if (timeRemaining <= 0) {
-            endGame();
-        }
+        calculateStats();
+        if (timeRemaining <= 0) endGame();
     }, 1000);
 }
 
-function calculateLiveStats() {
-    const timeElapsed = (selectedTime - timeRemaining) / 60; // in minutes
+function calculateStats() {
+    // Count exact correct characters from DOM
+    let totalCorrect = document.querySelectorAll('.word .correct').length;
+    let typedSoFar = totalCorrect + stats.wrongStrokes;
+    
+    const timeElapsed = (selectedTime - timeRemaining) / 60; 
     if (timeElapsed > 0) {
-        // WPM = (Correct Keystrokes / 5) / Time in Minutes
-        let wpm = Math.round((stats.correctStrokes / 5) / timeElapsed);
+        let wpm = Math.round((totalCorrect / 5) / timeElapsed);
         liveWpmDisplay.innerHTML = `${Math.max(0, wpm)} <small>WPM</small>`;
     }
     
-    let acc = 100;
-    if (stats.totalTyped > 0) {
-        acc = Math.round((stats.correctStrokes / stats.totalTyped) * 100);
-    }
+    let acc = typedSoFar > 0 ? Math.round((totalCorrect / typedSoFar) * 100) : 100;
     liveAccDisplay.innerHTML = `${acc}<small>%</small>`;
 }
 
 function endGame() {
     clearInterval(timerInterval);
     isTyping = false;
-    blurInput();
     
-    const timeElapsed = (selectedTime - timeRemaining) / 60 || (selectedTime / 60);
-    let finalWpm = Math.round((stats.correctStrokes / 5) / timeElapsed);
-    let finalAcc = stats.totalTyped > 0 ? Math.round((stats.correctStrokes / stats.totalTyped) * 100) : 0;
-    
-    // Populate Results Modal
+    let totalCorrect = document.querySelectorAll('.word .correct').length;
+    let finalWpm = Math.round((totalCorrect / 5) / (selectedTime / 60));
+    let finalAcc = liveAccDisplay.innerText.replace('%', '');
+
     document.getElementById('final-wpm').innerHTML = `${finalWpm} <span>WPM</span>`;
     document.getElementById('final-acc').innerHTML = `${finalAcc}<span>%</span>`;
-    document.getElementById('stat-correct').innerText = stats.correctStrokes;
-    document.getElementById('stat-wrong').innerText = stats.wrongStrokes + stats.extraStrokes;
+    document.getElementById('stat-correct').innerText = totalCorrect;
+    document.getElementById('stat-wrong').innerText = stats.wrongStrokes;
     document.getElementById('stat-words').innerText = activeWordIndex;
 
-    // Show Modal
     document.getElementById('result-modal').classList.remove('hidden');
 }
 
-// ==========================================================================
-// 7. EVENT LISTENERS FOR CONTROLS
-// ==========================================================================
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Tab') {
-        e.preventDefault(); // Prevent default tabbing behavior
-    }
-    if (e.key === 'Enter' && !isTyping && document.getElementById('result-modal').classList.contains('hidden')) {
-        initGame(); // Quick restart
-    }
-});
-
-focusOverlay.addEventListener('click', focusInput);
-document.getElementById('typing-container').addEventListener('click', focusInput);
-hiddenInput.addEventListener('blur', blurInput);
-
+// Config Controls
 document.getElementById('restart-btn').addEventListener('click', initGame);
 document.getElementById('close-modal-btn').addEventListener('click', initGame);
 
-// Config Buttons
 document.querySelectorAll('#lang-group .toggle-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         document.querySelectorAll('#lang-group .toggle-btn').forEach(b => b.classList.remove('active'));
@@ -377,131 +229,39 @@ document.querySelectorAll('#time-group .toggle-btn').forEach(btn => {
     });
 });
 
-// ==========================================================================
-// 8. GOVERNMENT STYLE CERTIFICATE GENERATOR (High-End jsPDF)
-// ==========================================================================
+// Govt. Style Certificate
 document.getElementById('download-cert-btn').addEventListener('click', () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF('landscape', 'mm', 'a4');
-    
-    const name = document.getElementById('student-name').value || "Registered Candidate";
+    const name = document.getElementById('student-name').value || "Candidate";
     const wpm = document.getElementById('final-wpm').innerText.replace('WPM', '').trim();
     const acc = document.getElementById('final-acc').innerText.replace('%', '').trim();
-    
-    const today = new Date();
-    const dateStr = today.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-    const regNo = `PRO-${today.getFullYear()}-${Math.floor(10000 + Math.random() * 90000)}`;
+    const dateStr = new Date().toLocaleDateString('en-GB');
 
-    // --- 1. Draw Premium Borders ---
-    doc.setLineWidth(4);
-    doc.setDrawColor(37, 99, 235); // Primary Blue
-    doc.rect(10, 10, 277, 190);
-    
-    doc.setLineWidth(1);
-    doc.setDrawColor(200, 200, 200); // Inner Gray
-    doc.rect(16, 16, 265, 178);
+    doc.setLineWidth(4); doc.setDrawColor(37, 99, 235); doc.rect(10, 10, 277, 190);
+    doc.setLineWidth(1); doc.setDrawColor(200, 200, 200); doc.rect(16, 16, 265, 178);
 
-    // --- 2. Registration & Header ---
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(10);
-    doc.setTextColor(100, 100, 100);
-    doc.text(`Registration No: ${regNo}`, 22, 28);
-    doc.text(`Govt. Verified Authenticity`, 215, 28);
+    doc.setFont("helvetica", "bold"); doc.setFontSize(28); doc.setTextColor(37, 99, 235);
+    doc.text("BHARAT TYPING INITIATIVE", 148.5, 45, { align: "center" });
+    doc.setFontSize(12); doc.setTextColor(100, 100, 100);
+    doc.text("GOVERNMENT VERIFIED CERTIFICATION", 148.5, 53, { align: "center" });
 
-    // --- 3. Institution Name & Logo (Text based) ---
-    doc.setFontSize(28);
-    doc.setTextColor(37, 99, 235);
-    doc.text("DEPARTMENT OF DIGITAL SKILLS", 148.5, 45, { align: "center" });
-    
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(12);
-    doc.setTextColor(100, 100, 100);
-    doc.text("AN INITIATIVE FOR NATIONAL IT LITERACY", 148.5, 53, { align: "center" });
-
-    // --- 4. Main Title ---
-    doc.setFont("times", "bolditalic");
-    doc.setFontSize(45);
-    doc.setTextColor(30, 41, 59);
+    doc.setFont("times", "bolditalic"); doc.setFontSize(40); doc.setTextColor(30, 41, 59);
     doc.text("Certificate of Typing Proficiency", 148.5, 85, { align: "center" });
 
-    // --- 5. Certification Text ---
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(16);
-    doc.setTextColor(50, 50, 50);
-    doc.text("This official document certifies that", 148.5, 105, { align: "center" });
-
-    // --- 6. Candidate Name ---
-    doc.setFont("times", "bold");
-    doc.setFontSize(38);
-    doc.setTextColor(37, 99, 235);
+    doc.setFont("times", "bold"); doc.setFontSize(35); doc.setTextColor(37, 99, 235);
     doc.text(name.toUpperCase(), 148.5, 122, { align: "center" });
-    doc.setLineWidth(0.5);
-    doc.line(70, 125, 227, 125); // Underline name
-
-    // --- 7. Achievement Details ---
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(14);
-    doc.setTextColor(50, 50, 50);
-    doc.text(`has successfully completed the Professional Typing Examination with`, 148.5, 138, { align: "center" });
-
-    // Highlighted Stats Box inside PDF
-    doc.setDrawColor(37, 99, 235);
-    doc.setFillColor(239, 246, 255); // Light blue bg
-    doc.rect(85, 145, 127, 15, 'FD');
     
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(14);
-    doc.setTextColor(37, 99, 235);
-    doc.text(`Gross Speed: ${wpm} WPM   |   Accuracy: ${acc}%`, 148.5, 155, { align: "center" });
+    doc.setFont("helvetica", "bold"); doc.setFontSize(14);
+    doc.text(`Speed: ${wpm} WPM   |   Accuracy: ${acc}%`, 148.5, 155, { align: "center" });
 
-    // --- 8. Fake QR Code (Visual element) ---
-    doc.setFillColor(0, 0, 0);
-    for(let i=0; i<5; i++){
-        for(let j=0; j<5; j++){
-            if(Math.random() > 0.4) {
-                doc.rect(22 + (i*4), 160 + (j*4), 4, 4, 'F');
-            }
-        }
-    }
-    // QR Border squares
-    doc.rect(22, 160, 8, 8, 'F'); doc.rect(34, 160, 8, 8, 'F'); doc.rect(22, 172, 8, 8, 'F');
-    doc.setFontSize(8); doc.text("Scan to Verify", 22, 184);
-
-    // --- 9. Official Seal Design ---
-    doc.setLineWidth(1);
-    doc.setDrawColor(220, 38, 38); // Red seal
-    doc.circle(148.5, 172, 12, 'S');
-    doc.circle(148.5, 172, 10, 'S');
-    doc.setFont("times", "bold");
-    doc.setFontSize(10);
-    doc.setTextColor(220, 38, 38);
-    doc.text("VERIFIED", 148.5, 173.5, { align: "center" });
-
-    // --- 10. Developer Signature (Ayan Karmakar) ---
-    doc.setTextColor(0, 0, 0);
-    doc.setFontSize(12);
-    
-    // Date
-    doc.line(70, 175, 110, 175);
-    doc.text(`Date: ${dateStr}`, 90, 182, { align: "center" });
-    
-    // Signature
-    doc.setFont("times", "italic");
-    doc.setFontSize(20);
-    doc.setTextColor(37, 99, 235); // Blue ink signature
+    doc.setFont("times", "italic"); doc.setFontSize(20); doc.setTextColor(37, 99, 235);
     doc.text("Ayan Karmakar", 230, 172, { align: "center" }); 
-    
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(12);
-    doc.setTextColor(0, 0, 0);
-    doc.line(190, 175, 260, 175);
-    doc.text("Ayan Karmakar", 225, 182, { align: "center" });
-    doc.setFontSize(9);
-    doc.text("Chief Development Officer", 225, 187, { align: "center" });
+    doc.setFont("helvetica", "normal"); doc.setFontSize(12); doc.setTextColor(0, 0, 0);
+    doc.text("Ayan Karmakar, Founder", 230, 182, { align: "center" });
+    doc.text(`Date: ${dateStr}`, 60, 182);
 
-    // --- 11. Trigger Download ---
-    doc.save(`Govt_Verified_Typing_Certificate_${name.replace(/\s+/g, '_')}.pdf`);
+    doc.save(`BharatTyping_Certificate_${name.replace(/\s+/g, '_')}.pdf`);
 });
 
-// Start the core engine on load
 window.onload = initGame;
