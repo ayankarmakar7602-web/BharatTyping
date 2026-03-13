@@ -1,104 +1,468 @@
+/* ==========================================================================
+   1. PREMIUM VARIABLES & COLOR PALETTE
+   ========================================================================== */
 :root {
-    --bg-main: #f3f4f6;
-    --bg-card: #ffffff;
-    --primary-blue: #2563eb;
-    --primary-blue-hover: #1d4ed8;
-    --primary-blue-light: #eff6ff;
-    --success-green: #10b981;
-    --error-red: #ef4444;
-    --error-bg: #fee2e2;
-    --text-main: #1e293b;
-    --text-muted: #64748b;
-    --border-color: #e2e8f0;
-    --font-ui: 'Inter', 'Noto Sans Bengali', sans-serif;
-    --font-typing: 'Inter', 'Noto Sans Bengali', sans-serif; /* Changed for better Bengali rendering */
+    /* Main Backgrounds */
+    --bg-body: #f4f7f6;
+    --bg-surface: #ffffff;
+    
+    /* Brand Colors (BharatTyping) */
+    --brand-blue: #2563eb;
+    --brand-blue-hover: #1d4ed8;
+    --brand-blue-light: #eff6ff;
+    
+    /* Typing Feedback Colors */
+    --text-correct: #10b981; /* Green */
+    --text-wrong: #ef4444;   /* Red */
+    --bg-wrong: #fee2e2;     /* Light Red Background for errors */
+    --text-default: #64748b; /* Muted Gray for untyped text */
+    --text-dark: #1e293b;    /* Dark Black/Blue for UI text */
+    
+    /* Typography */
+    /* Using Noto Sans Bengali globally to prevent ANY font rendering issues */
+    --font-main: 'Inter', 'Noto Sans Bengali', sans-serif;
+    
+    /* UI Elements */
+    --border-soft: #e2e8f0;
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --radius-md: 8px;
+    --radius-lg: 12px;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: var(--bg-main); color: var(--text-main); font-family: var(--font-ui); line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column; }
-.text-blue { color: var(--primary-blue) !important; }
-.text-green { color: var(--success-green) !important; }
-.text-red { color: var(--error-red) !important; }
+/* ==========================================================================
+   2. GLOBAL RESET
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-dark);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Utility Colors */
+.text-blue { color: var(--brand-blue) !important; }
+.text-green { color: var(--text-correct) !important; }
+.text-red { color: var(--text-wrong) !important; }
+.text-orange { color: #f59e0b !important; }
 .hidden { display: none !important; opacity: 0; pointer-events: none; }
 
-.navbar { background-color: var(--bg-card); box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 1rem 0; }
-.nav-container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
-.brand { font-size: 1.5rem; font-weight: 700; color: var(--text-main); }
-.brand-icon { color: var(--primary-blue); margin-right: 5px; }
-.highlight { color: var(--primary-blue); }
-.nav-links button { background: none; border: none; font-size: 1rem; font-weight: 500; color: var(--text-muted); cursor: pointer; padding: 0.5rem 1rem; border-radius: 8px; }
-.nav-links button.active { background: var(--primary-blue-light); color: var(--primary-blue); }
-
-.app-wrapper { max-width: 1000px; margin: 2rem auto; padding: 0 1.5rem; width: 100%; display: flex; flex-direction: column; gap: 1.5rem; }
-
-.config-card { background: var(--bg-card); border-radius: 12px; padding: 1rem 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; justify-content: center; gap: 2rem; align-items: center;}
-.config-label { font-weight: 600; color: var(--text-muted); font-size: 0.9rem; margin-right: 10px; }
-.btn-group { background: var(--bg-main); padding: 5px; border-radius: 8px; display: inline-flex; }
-.toggle-btn { background: none; border: none; padding: 8px 15px; border-radius: 6px; font-weight: 500; color: var(--text-muted); cursor: pointer; }
-.toggle-btn.active { background: var(--bg-card); color: var(--primary-blue); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-.vertical-divider { width: 2px; height: 30px; background: var(--border-color); }
-
-.stats-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-.stat-box { background: var(--bg-card); border-radius: 12px; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 1.5rem; border: 1px solid var(--border-color); }
-.stat-icon { font-size: 2rem; padding: 1rem; border-radius: 8px; }
-.speed-icon { color: var(--primary-blue); background: var(--primary-blue-light); }
-.acc-icon { color: var(--success-green); background: #d1fae5; }
-.time-icon { color: #f59e0b; background: #fef3c7; }
-.stat-title { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; display: block; }
-.stat-value { font-size: 2rem; font-weight: 700; }
-
-.typing-card { background: var(--bg-card); border-radius: 16px; padding: 2.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); position: relative; }
-#typing-container { position: relative; width: 100%; min-height: 200px; }
-
-/* Mobile Input Fix */
-#hidden-input { position: absolute; top: -100px; left: -100px; width: 1px; height: 1px; opacity: 0; pointer-events: none;}
-
-#focus-overlay { position: absolute; inset: 0; background: rgba(255,255,255,0.8); backdrop-filter: blur(4px); z-index: 10; display: flex; justify-content: center; align-items: center; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-.overlay-content { background: var(--primary-blue); color: white; padding: 1rem 2rem; border-radius: 30px; }
-
-/* Full Paragraph Fix - No Hidden Overflow */
-#text-display { 
-    font-family: var(--font-typing); 
-    font-size: 1.8rem; 
-    line-height: 1.8; 
-    color: var(--text-muted); 
-    height: auto; /* Let it expand fully */
-    max-height: 55vh; /* Prevents it from going offscreen entirely */
-    overflow-y: auto; /* Adds scrollbar inside if too long */
-    padding-right: 10px;
+/* ==========================================================================
+   3. HEADER / NAVBAR
+   ========================================================================== */
+.navbar {
+    background-color: var(--bg-surface);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
 }
 
-#words { display: flex; flex-wrap: wrap; align-content: flex-start; transition: 0.3s; }
-.word { display: inline-block; margin: 0 0.6em 0.5em 0; border-bottom: 2px solid transparent; transition: 0.1s; position: relative;}
-.word.active { color: var(--text-main); }
-.word.error { border-bottom-color: var(--error-red); }
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-/* NEW RENDER LOGIC STYLES */
-span.correct { color: var(--success-green); }
-span.incorrect { color: var(--error-red); background-color: var(--error-bg); border-radius: 3px;}
-span.untyped { color: inherit; }
+.brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-.shake-animation { animation: horizontalShake 0.3s both; }
-@keyframes horizontalShake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
+.brand-icon { color: var(--brand-blue); }
+.brand .highlight { color: var(--brand-blue); }
 
-.typing-footer { margin-top: 2rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 1.5rem; }
-.primary-btn { background: var(--primary-blue); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; }
+.nav-links { display: flex; gap: 10px; }
+.nav-btn {
+    background: transparent;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--font-main);
+    color: var(--text-default);
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.nav-btn:hover { color: var(--text-dark); background: var(--bg-body); }
+.nav-btn.active { color: var(--brand-blue); background: var(--brand-blue-light); }
 
-/* Modal Styling */
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; display: flex; justify-content: center; align-items: center; }
-.modal-box { background: white; padding: 2.5rem; border-radius: 16px; width: 90%; max-width: 500px; text-align: center; }
-.final-scores { display: flex; justify-content: space-around; background: var(--bg-main); padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; }
-.score-number { font-size: 3rem; font-weight: 800; }
-.detailed-stats { display: flex; justify-content: space-between; margin-bottom: 2rem; font-size: 0.9rem; }
-.certificate-claim { border: 2px dashed var(--primary-blue); background: var(--primary-blue-light); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; }
-.input-group { display: flex; gap: 10px; margin-top: 10px; }
-.input-group input { flex: 1; padding: 10px; border: 1px solid var(--border-color); border-radius: 6px; }
-.action-btn { padding: 10px 15px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
-.download-btn { background: var(--primary-blue); color: white; }
-.outline-btn { background: none; border: 2px solid var(--border-color); width: 100%; }
+/* ==========================================================================
+   4. MAIN APP WRAPPER
+   ========================================================================== */
+.app-wrapper {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 
+/* ==========================================================================
+   5. CONFIGURATION PANEL (Language & Time)
+   ========================================================================== */
+.config-panel {
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    padding: 1.2rem 2rem;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    border: 1px solid var(--border-soft);
+}
+
+.config-group { display: flex; align-items: center; gap: 1rem; }
+.config-title { font-weight: 600; color: var(--text-default); font-size: 0.95rem; text-transform: uppercase; }
+
+.btn-group {
+    background: var(--bg-body);
+    padding: 4px;
+    border-radius: var(--radius-md);
+    display: flex;
+}
+
+.opt-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: var(--font-main);
+    font-weight: 500;
+    color: var(--text-default);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.opt-btn:hover { color: var(--text-dark); }
+.opt-btn.active { background: var(--bg-surface); color: var(--brand-blue); box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-weight: 600; }
+
+.divider { width: 2px; height: 35px; background: var(--border-soft); }
+
+/* ==========================================================================
+   6. LIVE DASHBOARD (Stats)
+   ========================================================================== */
+.live-dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.dash-card {
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border: 1px solid var(--border-soft);
+}
+
+.dash-icon {
+    font-size: 2.2rem;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    background: var(--bg-body);
+}
+
+.dash-label { font-size: 0.9rem; font-weight: 600; color: var(--text-default); text-transform: uppercase; margin-bottom: 2px;}
+.dash-value { font-size: 2.2rem; font-weight: 700; color: var(--text-dark); line-height: 1; }
+.dash-value small { font-size: 1rem; font-weight: 500; color: var(--text-default); }
+
+/* ==========================================================================
+   7. TYPING BOARD (The Main Area)
+   ========================================================================== */
+.typing-board {
+    background: var(--bg-surface);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-hover);
+    border: 1px solid var(--border-soft);
+    position: relative;
+    /* Removed min-height so it naturally adapts */
+}
+
+/* Hidden Input for Mobile and Stroke Capture */
+#type-input {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    opacity: 0;
+}
+
+/* Blur Overlay for Focus */
+#focus-screen {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.focus-msg {
+    background: var(--brand-blue);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* The Paragraph Display */
+#paragraph-display {
+    font-family: var(--font-main); /* Using main font to protect Bengali conjuncts */
+    font-size: 1.6rem;
+    line-height: 2; /* Lots of breathing room */
+    color: var(--text-default);
+    
+    /* THE FIX FOR FULL PARAGRAPH VISIBILITY */
+    height: auto; 
+    overflow: visible; 
+    
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    transition: filter 0.3s ease;
+}
+
+.unfocused { filter: blur(4px); opacity: 0.6; }
+
+/* Word & Character Highlights */
+.word {
+    display: inline-block;
+    margin: 0 0.6em 0.3em 0;
+    border-bottom: 2px solid transparent;
+    transition: 0.1s ease;
+    position: relative;
+}
+
+/* The active word indicator */
+.word.active {
+    border-bottom-color: var(--brand-blue);
+}
+
+.word.error {
+    border-bottom-color: var(--text-wrong);
+}
+
+/* These classes will be injected via JS */
+span.correct { 
+    color: var(--text-correct); /* Green */
+}
+
+span.incorrect { 
+    color: var(--text-wrong); /* Red */
+    background-color: var(--bg-wrong); /* Light red background for visibility */
+    border-radius: 3px;
+    padding: 0 1px;
+}
+
+span.untyped { 
+    color: var(--text-default); 
+}
+
+/* Shake Animation for Wrong Strokes */
+.shake-it { animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both; }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+/* Board Footer */
+.board-footer {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-soft);
+    padding-top: 1.5rem;
+}
+
+.hint { color: var(--text-default); font-size: 0.9rem; }
+kbd { background: var(--bg-body); border: 1px solid var(--border-soft); padding: 3px 6px; border-radius: 4px; font-weight: 600; font-family: sans-serif;}
+
+.action-btn {
+    background: var(--brand-blue);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.action-btn:hover { background: var(--brand-blue-hover); transform: translateY(-2px); }
+
+/* ==========================================================================
+   8. RESULT & CERTIFICATE MODAL
+   ========================================================================== */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--bg-surface);
+    width: 95%;
+    max-width: 650px;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    animation: modalSlideUp 0.4s ease-out;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@keyframes modalSlideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-top h2 { font-size: 2.2rem; color: var(--text-dark); margin-bottom: 5px; }
+.modal-top p { color: var(--text-default); margin-bottom: 2rem; }
+
+.score-board {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    background: var(--bg-body);
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+}
+
+.score-item h4 { font-size: 1rem; color: var(--text-default); text-transform: uppercase; letter-spacing: 1px; }
+.score-val { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-top: 5px; }
+.score-val span { font-size: 1.2rem; font-weight: 600; }
+
+.detailed-metrics {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2.5rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-default);
+}
+
+.detailed-metrics strong { font-size: 1.2rem; margin-left: 5px; }
+
+/* Certificate Box */
+.certificate-box {
+    border: 2px dashed var(--brand-blue);
+    background: var(--brand-blue-light);
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.cert-title { display: flex; align-items: center; gap: 10px; color: var(--brand-blue); margin-bottom: 5px; }
+.cert-title i { font-size: 1.8rem; }
+.cert-title h3 { font-size: 1.3rem; }
+.certificate-box p { color: var(--text-dark); font-size: 0.9rem; margin-bottom: 15px; }
+
+.input-row { display: flex; gap: 10px; }
+.input-row input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: var(--font-main);
+    outline: none;
+}
+.input-row input:focus { border-color: var(--brand-blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+
+.cert-btn {
+    background: var(--brand-blue);
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.cert-btn:hover { background: var(--brand-blue-hover); }
+
+.try-again-btn {
+    background: transparent;
+    border: 2px solid var(--border-soft);
+    color: var(--text-dark);
+    padding: 12px 30px;
+    border-radius: var(--radius-md);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.2s;
+}
+.try-again-btn:hover { background: var(--bg-body); border-color: var(--text-default); }
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-    .stats-bar { grid-template-columns: 1fr; }
-    .config-card { flex-direction: column; gap: 1rem; }
-    #text-display { font-size: 1.4rem; max-height: 40vh; }
+    .config-panel { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+    .divider { width: 100%; height: 1px; }
+    .live-dashboard { grid-template-columns: 1fr; }
+    .input-row { flex-direction: column; }
+    .cert-btn { padding: 12px; justify-content: center; }
+    #paragraph-display { font-size: 1.3rem; }
 }
