@@ -2,73 +2,79 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BharatTyping - Pro 🇮🇳</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BharatTyping Elite 🇮🇳</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;700&family=Poppins:wght@400;600&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body class="dark-mode">
     <div class="container">
-        <header>
-            <h1>BharatTyping 🇮🇳</h1>
-            <button id="theme-toggle">🌗 Mode</button>
-        </header>
+        <button id="home-btn" class="nav-btn" onclick="location.reload()">🏠 Home</button>
 
         <div id="main-menu" class="screen">
-            <h2>স্বাগতম (Welcome)</h2>
-            <div class="btn-group">
-                <button onclick="showLanguageMenu()">Start Practice / Test</button>
+            <h1 class="logo">BharatTyping <span>PRO</span></h1>
+            <div class="mode-grid">
+                <button class="main-opt" onclick="showLang()">Practice / Test</button>
+                <div class="theme-switch">
+                    <span>Light</span>
+                    <input type="checkbox" id="theme-slider" checked onclick="toggleTheme()">
+                    <span>Dark</span>
+                </div>
             </div>
         </div>
 
-        <div id="language-menu" class="screen hidden">
-            <h2>Select Language</h2>
-            <div class="btn-group">
-                <button onclick="selectLanguage('english')">English</button>
-                <button onclick="selectLanguage('bengali')">বাংলা</button>
-                <button onclick="selectLanguage('hindi')">हिन्दी</button>
+        <div id="lang-screen" class="screen hidden">
+            <button class="back-btn" onclick="goBack('main-menu')">← Back</button>
+            <h2>ভাষা নির্বাচন করুন</h2>
+            <div class="opt-grid">
+                <button onclick="setLang('english')">English</button>
+                <button onclick="setLang('bengali')">Bengali (বাংলা)</button>
+                <button onclick="setLang('hindi')">Hindi (हिन्दी)</button>
             </div>
-            <button class="back-btn" onclick="goBack('main-menu')">Back</button>
         </div>
 
-        <div id="timer-menu" class="screen hidden">
-            <h2>Select Time</h2>
-            <div class="btn-group">
+        <div id="time-screen" class="screen hidden">
+            <button class="back-btn" onclick="goBack('lang-screen')">← Back</button>
+            <h2>সময় নির্বাচন করুন</h2>
+            <div class="opt-grid">
                 <button onclick="startApp(1)">1 Min</button>
                 <button onclick="startApp(2)">2 Min</button>
                 <button onclick="startApp(3)">3 Min</button>
                 <button onclick="startApp(5)">5 Min</button>
             </div>
-            <button class="back-btn" onclick="goBack('language-menu')">Back</button>
         </div>
 
         <div id="typing-screen" class="screen hidden">
-            <div class="stats-bar">
-                <div class="stat-item">Time: <span id="timer">00:00</span></div>
-                <div class="stat-item">WPM: <span id="wpm">0</span></div>
-                <div class="stat-item">Accuracy: <span id="accuracy">100%</span></div>
+            <div class="stats-header">
+                <div class="stat">Time: <span id="timer">00:00</span></div>
+                <div class="stat">WPM: <span id="wpm">0</span></div>
+                <div class="stat">Acc: <span id="acc">100%</span></div>
             </div>
-            <div id="text-display" class="text-box"></div>
-            <input type="text" id="hidden-input" autocomplete="off" autofocus>
-            <p class="hint">Type the text above to start...</p>
+            
+            <div id="display-wrapper" onclick="focusInput()">
+                <div id="text-display"></div>
+                <input type="text" id="master-input" autocomplete="off" autofocus>
+            </div>
+            
+            <p class="instruction">টাইপ করা শুরু করো, ভুল হলে Backspace চাপো...</p>
         </div>
 
         <div id="result-screen" class="screen hidden">
-            <h2>Final Result 📊</h2>
-            <div class="final-stats">
-                <p>Speed: <mark id="final-wpm">0</mark> WPM</p>
-                <p>Accuracy: <mark id="final-accuracy">0</mark>%</p>
+            <h2>পারফরম্যান্স রিপোর্ট 🇮🇳</h2>
+            <div class="result-card">
+                <div class="res-item">Speed: <span id="res-wpm">0</span></div>
+                <div class="res-item">Accuracy: <span id="res-acc">0</span>%</div>
             </div>
-            <div class="btn-group">
-                <button onclick="generateCertificate()">Download Certificate 🎓</button>
-                <button onclick="location.reload()" style="background: #555;">Restart</button>
+            <div class="action-btns">
+                <button onclick="generateCertificate()" class="cert-btn">📜 Get Certificate</button>
+                <button onclick="location.reload()">🔄 Restart</button>
             </div>
         </div>
     </div>
 
-    <audio id="key-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_730626027a.mp3"></audio>
-    <audio id="error-sound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
+    <audio id="sfx-key" src="https://typingx0.com/sound/mechanical/key1.mp3"></audio>
+    <audio id="sfx-error" src="https://www.myinstants.com/media/sounds/wrong-answer-126515.mp3"></audio>
 
     <script src="script.js"></script>
 </body>

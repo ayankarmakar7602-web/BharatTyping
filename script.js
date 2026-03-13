@@ -1,114 +1,108 @@
-const texts = {
-    english: [
-        "The Taj Mahal is an ivory-white marble mausoleum on the right bank of the river Yamuna in Agra.",
-        "Practice makes a man perfect, especially when it comes to typing speed and accuracy.",
-        "Technology is best when it brings people together and makes lives easier."
-    ],
-    bengali: [
-        "ভারতবর্ষ আমাদের মাতৃভূমি। এদেশের বৈচিত্র্যের মধ্যে ঐক্যই আমাদের প্রধান শক্তি।",
-        "টাইপিং প্র্যাকটিস করলে হাতের স্পিড বাড়ে এবং কাজের গতি অনেক উন্নত হয়।",
-        "সুন্দরবন পৃথিবীর বৃহত্তম ম্যানগ্রোভ বন যা পশ্চিমবঙ্গ ও বাংলাদেশে অবস্থিত।"
-    ],
-    hindi: [
-        "भारत एक बहुत बड़ा और सुंदर देश है। यहाँ कई भाषाएँ बोली जाती हैं।",
-        "निरंतर अभ्यास ही सफलता का एकमात्र मार्ग है। मेहनत कभी बेकार नहीं जाती।",
-        "कंप्यूटर आज के युग की सबसे बड़ी जरूरत बन गया है।"
-    ]
+const DB = {
+    english: ["India, officially the Republic of India, is a country in South Asia. It is the seventh-largest country by area and the most populous country in the world. Bounded by the Indian Ocean on the south, the Arabian Sea on the southwest, and the Bay of Bengal on the southeast, it shares land borders with Pakistan to the west; China, Nepal, and Bhutan to the north; and Bangladesh and Myanmar to the east. India has been a federal republic since 1950, governed through a democratic parliamentary system. It is a pluralistic, multilingual and multi-ethnic society. India's economy is the world's fifth-largest by nominal GDP and third-largest by purchasing power parity. The country has a rich history, from ancient Indus Valley Civilizations to the modern technological powerhouse it is today."],
+    bengali: ["ভারতবর্ষ বিশ্বের অন্যতম প্রাচীন ও বৈচিত্র্যময় দেশ। হিমালয়ের পাদদেশ থেকে ভারত মহাসাগরের উপকূল পর্যন্ত বিস্তৃত এই ভূখণ্ড তার সমৃদ্ধ সংস্কৃতি ও ঐতিহ্যের জন্য পরিচিত। এদেশের স্বাধীনতা সংগ্রাম ছিল ত্যাগের এক মহাকাব্য। রবীন্দ্রনাথ ঠাকুর থেকে শুরু করে নেতাজি সুভাষচন্দ্র বসুর মতো মনীষীদের জন্মভূমি এই ভারত। বর্তমান যুগে ভারত তথ্যপ্রযুক্তি এবং মহাকাশ গবেষণায় প্রভূত উন্নতি লাভ করেছে। চন্দ্রযান থেকে মঙ্গলযান, ভারতের বিজয় পতাকা আজ মহাকাশেও উড়ছে। আমাদের উচিত আমাদের এই মহান দেশের ঐক্য বজায় রাখা এবং উন্নতির পথে এগিয়ে নিয়ে যাওয়া। টাইপিং প্র্যাকটিস আমাদের ডিজিটাল যুগে দ্রুত যোগাযোগ করতে সাহায্য করে।"],
+    hindi: ["भारत दुनिया का सबसे बड़ा लोकतंत्र है। यहाँ की सभ्यता और संस्कृति हजारों साल पुरानी है। भारत के उत्तर में हिमालय की ऊँची चोटियाँ हैं और दक्षिण में विशाल हिंद महासागर। भारत अपनी एकता और अखंडता के लिए जाना जाता है, जहाँ विभिन्न धर्मों और भाषाओं के लोग प्रेमपूर्वक रहते हैं। आज का भारत तकनीक और शिक्षा के क्षेत्र में तेजी से आगे बढ़ रहा है। डिजिटल इंडिया अभियान ने देश के कोने-कोने में इंटरनेट और तकनीक पहुँचा दी है। हमें गर्व है कि हम इस महान देश के नागरिक हैं। अपनी टाइपिंग गति बढ़ाना आज के समय में बहुत आवश्यक है ताकि हम अपनी बात तेजी से दुनिया तक पहुँचा सकें।"]
 };
 
-let selectedLang = 'english', timeLeft = 60, totalTime = 60, timer = null;
-let charIdx = 0, mistakes = 0, started = false;
+let lang = 'english', time = 60, timer = null, idx = 0, mistakes = 0, active = false;
+const input = document.getElementById('master-input');
+const display = document.getElementById('text-display');
 
-const hiddenInput = document.getElementById('hidden-input');
-const textDisplay = document.getElementById('text-display');
+function showLang() { goBack('lang-screen'); }
+function setLang(l) { lang = l; goBack('time-screen'); }
 
-function showLanguageMenu() {
-    document.getElementById('main-menu').classList.add('hidden');
-    document.getElementById('language-menu').classList.remove('hidden');
+function startApp(m) {
+    time = m * 60;
+    goBack('typing-screen');
+    render();
 }
 
-function selectLanguage(lang) {
-    selectedLang = lang;
-    document.getElementById('language-menu').classList.add('hidden');
-    document.getElementById('timer-menu').classList.remove('hidden');
+function render() {
+    const raw = DB[lang][0]; // বড় প্যারাগ্রাফ
+    display.innerHTML = raw.split('').map(c => `<span>${c}</span>`).join('');
+    display.children[0].classList.add('current');
+    input.value = ""; idx = 0; mistakes = 0; active = false;
+    setTimeout(() => input.focus(), 500);
 }
 
-function startApp(min) {
-    totalTime = min * 60; timeLeft = totalTime;
-    document.getElementById('timer-menu').classList.add('hidden');
-    document.getElementById('typing-screen').classList.remove('hidden');
-    renderText();
-}
+function focusInput() { input.focus(); }
 
-function renderText() {
-    const list = texts[selectedLang];
-    const quote = list[Math.floor(Math.random() * list.length)];
-    textDisplay.innerHTML = quote.split('').map(char => `<span>${char}</span>`).join('');
-    textDisplay.firstChild.classList.add('char-current');
-    hiddenInput.value = "";
-    charIdx = 0; mistakes = 0; started = false;
-    document.addEventListener('keydown', () => hiddenInput.focus());
-}
-
-hiddenInput.addEventListener('input', () => {
-    if (!started) { startTimer(); started = true; }
-    const spans = textDisplay.querySelectorAll('span');
-    const typed = hiddenInput.value.split('');
-    const lastChar = typed[charIdx];
-
-    if (charIdx < spans.length) {
-        if (lastChar == spans[charIdx].innerText) {
-            spans[charIdx].className = 'char-correct';
-            document.getElementById('key-sound').cloneNode(true).play();
-        } else {
-            spans[charIdx].className = 'char-wrong';
-            mistakes++;
-            document.getElementById('error-sound').cloneNode(true).play();
+input.addEventListener('input', (e) => {
+    if (!active) startTimer();
+    const spans = display.querySelectorAll('span');
+    const val = input.value.split('');
+    
+    // Backspace Logic
+    if (e.inputType === "deleteContentBackward") {
+        if (idx > 0) {
+            idx--;
+            spans[idx].className = '';
+            spans.forEach(s => s.classList.remove('current'));
+            spans[idx].classList.add('current');
         }
-        charIdx++;
-        if (charIdx < spans.length) spans[charIdx].classList.add('char-current');
+        return;
+    }
+
+    // Typing Logic
+    const char = val[val.length - 1];
+    if (idx < spans.length) {
+        if (char === spans[idx].innerText) {
+            spans[idx].className = 'correct';
+            playSound('sfx-key');
+        } else {
+            spans[idx].className = 'wrong';
+            mistakes++;
+            playSound('sfx-error');
+        }
+        idx++;
+        spans.forEach(s => s.classList.remove('current'));
+        if (spans[idx]) spans[idx].classList.add('current');
         updateStats();
     }
-    if (charIdx === spans.length) finish();
+    if (idx === spans.length) end();
 });
 
-function updateStats() {
-    let wpm = Math.round(((charIdx - mistakes) / 5) / ((totalTime - timeLeft) / 60 || 1));
-    document.getElementById('wpm').innerText = wpm > 0 ? wpm : 0;
-    let acc = Math.round(((charIdx - mistakes) / charIdx) * 100);
-    document.getElementById('accuracy').innerText = (acc || 100) + "%";
+function playSound(id) {
+    const s = document.getElementById(id).cloneNode();
+    s.volume = 0.5;
+    s.play().catch(() => {}); // অটো-প্লে ব্লক হ্যান্ডলিং
 }
 
 function startTimer() {
+    active = true;
+    let left = time;
     timer = setInterval(() => {
-        if (timeLeft > 0) {
-            timeLeft--;
-            let m = Math.floor(timeLeft / 60), s = timeLeft % 60;
-            document.getElementById('timer').innerText = `${m}:${s < 10 ? '0'+s : s}`;
-        } else { finish(); }
+        left--;
+        let m = Math.floor(left/60), s = left%60;
+        document.getElementById('timer').innerText = `${m}:${s<10?'0'+s:s}`;
+        if (left <= 0) end();
     }, 1000);
 }
 
-function finish() {
-    clearInterval(timer);
-    document.getElementById('typing-screen').classList.add('hidden');
-    document.getElementById('result-screen').classList.remove('hidden');
-    document.getElementById('final-wpm').innerText = document.getElementById('wpm').innerText;
-    document.getElementById('final-accuracy').innerText = document.getElementById('accuracy').innerText.replace('%','');
+function updateStats() {
+    let wpm = Math.round((idx / 5) / ((time - (parseInt(document.getElementById('timer').innerText.split(':')[0]*60) + parseInt(document.getElementById('timer').innerText.split(':')[1]))) / 60) || 0);
+    document.getElementById('wpm').innerText = wpm;
+    document.getElementById('acc').innerText = Math.round(((idx - mistakes) / idx) * 100 || 100) + "%";
 }
 
-function generateCertificate() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('l', 'mm', 'a4');
-    doc.setFillColor(30, 41, 59); doc.rect(0, 0, 297, 210, 'F');
-    doc.setTextColor(251, 146, 60); doc.setFontSize(40); doc.text("BharatTyping Certificate", 148, 60, {align:'center'});
-    doc.setTextColor(255, 255, 255); doc.setFontSize(20); doc.text("Performance Result", 148, 90, {align:'center'});
-    doc.setFontSize(30); doc.text(`Speed: ${document.getElementById('final-wpm').innerText} WPM`, 148, 120, {align:'center'});
-    doc.text(`Accuracy: ${document.getElementById('final-accuracy').innerText}%`, 148, 140, {align:'center'});
-    doc.save('certificate.pdf');
+function end() {
+    clearInterval(timer);
+    goBack('result-screen');
+    document.getElementById('res-wpm').innerText = document.getElementById('wpm').innerText;
+    document.getElementById('res-acc').innerText = document.getElementById('acc').innerText.replace('%','');
 }
 
 function goBack(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
+}
+
+function generateCertificate() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('l', 'mm', 'a4');
+    doc.setFillColor(20, 20, 20); doc.rect(0, 0, 297, 210, 'F');
+    doc.setTextColor(247, 129, 102); doc.setFontSize(50); doc.text("BharatTyping Pro 🇮🇳", 148, 70, {align:'center'});
+    doc.setTextColor(255); doc.setFontSize(25); doc.text(`Speed: ${document.getElementById('res-wpm').innerText} WPM`, 148, 110, {align:'center'});
+    doc.text(`Accuracy: ${document.getElementById('res-acc').innerText}%`, 148, 130, {align:'center'});
+    doc.save('pro-certificate.pdf');
 }
