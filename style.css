@@ -1,51 +1,44 @@
 :root {
-    --bg: #0d1117; --card: #161b22; --text: #c9d1d9;
-    --accent: #f78166; --green: #3fb950; --red: #f85149;
-}
-body.light-mode {
-    --bg: #f0f2f5; --card: #ffffff; --text: #1f2328;
+    --gold: #d4af37; --bg: #0a0a0c; --card: #15151a;
+    --text: #e0e0e0; --primary: #007bff;
 }
 body {
-    margin: 0; font-family: 'JetBrains Mono', 'Hind Siliguri', monospace;
-    background: var(--bg); color: var(--text); overflow: hidden;
-    display: flex; align-items: center; justify-content: center; height: 100vh;
+    margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg);
+    color: var(--text); display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden;
 }
-.container { width: 90%; max-width: 1000px; position: relative; }
 .screen {
-    background: var(--card); padding: 30px; border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.4); transition: 0.3s;
+    background: var(--card); padding: 40px; border-radius: 20px; text-align: center;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.8); border: 1px solid #333; width: 850px;
 }
 .hidden { display: none !important; }
+.logo { font-family: 'Cinzel', serif; font-size: 3rem; letter-spacing: 5px; color: var(--gold); }
+.logo span { color: #fff; }
 
-/* Typing Box */
-#display-wrapper {
-    background: rgba(0,0,0,0.1); padding: 25px; border-radius: 12px;
-    min-height: 200px; position: relative; cursor: text;
-    border: 2px solid #30363d; margin-top: 20px;
+/* Typing Area */
+#display-container {
+    background: #000; padding: 30px; border-radius: 15px; margin-top: 20px;
+    min-height: 250px; border: 2px solid #444; position: relative; cursor: text;
 }
 #text-display {
-    font-size: 1.5rem; line-height: 1.8; letter-spacing: 1px;
-    user-select: none; pointer-events: none;
+    font-family: 'JetBrains Mono', monospace; font-size: 1.6rem;
+    line-height: 2; text-align: left; color: #666; transition: 0.1s;
 }
-#master-input {
-    position: absolute; top: 0; left: 0; opacity: 0; pointer-events: none;
+#master-input { position: absolute; opacity: 0; pointer-events: none; }
+
+.correct { color: #fff; }
+.wrong { color: #ff4d4d; background: rgba(255, 77, 77, 0.2); border-radius: 4px; }
+.current { border-bottom: 3px solid var(--gold); background: rgba(212, 175, 55, 0.1); }
+
+/* Stats & Inputs */
+.stats-bar { display: flex; justify-content: space-between; margin-bottom: 15px; }
+.s-box { background: #222; padding: 10px 20px; border-radius: 10px; font-weight: bold; border-bottom: 3px solid var(--gold); }
+.name-input {
+    width: 80%; padding: 15px; margin: 20px 0; border-radius: 10px;
+    border: 1px solid var(--gold); background: transparent; color: #fff; font-size: 1.2rem; text-align: center;
 }
-
-/* Highlighting */
-.correct { color: var(--green); }
-.wrong { color: var(--red); background: rgba(248, 81, 73, 0.1); }
-.current { border-left: 3px solid var(--accent); background: rgba(247, 129, 102, 0.1); }
-
-/* Buttons & Grid */
-.opt-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
+.cert-btn { background: var(--gold) !important; color: #000 !important; }
 button {
-    padding: 15px; border: none; border-radius: 10px; cursor: pointer;
-    background: #30363d; color: white; font-weight: bold; transition: 0.2s;
+    padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer;
+    font-weight: bold; background: #333; color: #fff; transition: 0.3s; margin: 5px;
 }
-button:hover { background: var(--accent); transform: translateY(-2px); }
-.nav-btn { position: absolute; top: -50px; left: 0; }
-
-@media (max-width: 600px) {
-    #text-display { font-size: 1.1rem; }
-    .screen { padding: 15px; }
-}
+button:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); }

@@ -1,14 +1,18 @@
 const DB = {
-    english: ["India, officially the Republic of India, is a country in South Asia. It is the seventh-largest country by area and the most populous country in the world. Bounded by the Indian Ocean on the south, the Arabian Sea on the southwest, and the Bay of Bengal on the southeast, it shares land borders with Pakistan to the west; China, Nepal, and Bhutan to the north; and Bangladesh and Myanmar to the east. India has been a federal republic since 1950, governed through a democratic parliamentary system. It is a pluralistic, multilingual and multi-ethnic society. India's economy is the world's fifth-largest by nominal GDP and third-largest by purchasing power parity. The country has a rich history, from ancient Indus Valley Civilizations to the modern technological powerhouse it is today."],
-    bengali: ["ভারতবর্ষ বিশ্বের অন্যতম প্রাচীন ও বৈচিত্র্যময় দেশ। হিমালয়ের পাদদেশ থেকে ভারত মহাসাগরের উপকূল পর্যন্ত বিস্তৃত এই ভূখণ্ড তার সমৃদ্ধ সংস্কৃতি ও ঐতিহ্যের জন্য পরিচিত। এদেশের স্বাধীনতা সংগ্রাম ছিল ত্যাগের এক মহাকাব্য। রবীন্দ্রনাথ ঠাকুর থেকে শুরু করে নেতাজি সুভাষচন্দ্র বসুর মতো মনীষীদের জন্মভূমি এই ভারত। বর্তমান যুগে ভারত তথ্যপ্রযুক্তি এবং মহাকাশ গবেষণায় প্রভূত উন্নতি লাভ করেছে। চন্দ্রযান থেকে মঙ্গলযান, ভারতের বিজয় পতাকা আজ মহাকাশেও উড়ছে। আমাদের উচিত আমাদের এই মহান দেশের ঐক্য বজায় রাখা এবং উন্নতির পথে এগিয়ে নিয়ে যাওয়া। টাইপিং প্র্যাকটিস আমাদের ডিজিটাল যুগে দ্রুত যোগাযোগ করতে সাহায্য করে।"],
-    hindi: ["भारत दुनिया का सबसे बड़ा लोकतंत्र है। यहाँ की सभ्यता और संस्कृति हजारों साल पुरानी है। भारत के उत्तर में हिमालय की ऊँची चोटियाँ हैं और दक्षिण में विशाल हिंद महासागर। भारत अपनी एकता और अखंडता के लिए जाना जाता है, जहाँ विभिन्न धर्मों और भाषाओं के लोग प्रेमपूर्वक रहते हैं। आज का भारत तकनीक और शिक्षा के क्षेत्र में तेजी से आगे बढ़ रहा है। डिजिटल इंडिया अभियान ने देश के कोने-कोने में इंटरनेट और तकनीक पहुँचा दी है। हमें गर्व है कि हम इस महान देश के नागरिक हैं। अपनी टाइपिंग गति बढ़ाना आज के समय में बहुत आवश्यक है ताकि हम अपनी बात तेजी से दुनिया तक पहुँचा सकें।"]
+    english: [
+        "In the world of technology, speed is efficiency. (High-speed) typing is a skill! @2026 #Coding; Can you type 100% correctly? {Success} is near.",
+        "A quick brown fox jumps over the lazy dog. 1234567890! Symbols like #, $, %, &, *, (, ), _, +, [, ], {, }, |, \, :, ;, \", ', <, >, ?, /, , . are essential for pro typing.",
+        "Computer programming is the process of designing and building an executable computer program to accomplish a specific computing result."
+    ],
+    bengali: [
+        "          #! ' '   ()    !",
+        "         @Ayan;         ?   "
+    ]
 };
 
 let lang = 'english', time = 60, timer = null, idx = 0, mistakes = 0, active = false;
-const input = document.getElementById('master-input');
-const display = document.getElementById('text-display');
+let currentText = "";
 
-function showLang() { goBack('lang-screen'); }
 function setLang(l) { lang = l; goBack('time-screen'); }
 
 function startApp(m) {
@@ -18,55 +22,51 @@ function startApp(m) {
 }
 
 function render() {
-    const raw = DB[lang][0]; // বড় প্যারাগ্রাফ
-    display.innerHTML = raw.split('').map(c => `<span>${c}</span>`).join('');
-    display.children[0].classList.add('current');
-    input.value = ""; idx = 0; mistakes = 0; active = false;
-    setTimeout(() => input.focus(), 500);
+    const list = DB[lang];
+    currentText = list[Math.floor(Math.random() * list.length)]; // Random Paragraph
+    document.getElementById('text-display').innerHTML = currentText.split('').map(c => `<span>${c}</span>`).join('');
+    document.getElementById('text-display').children[0].classList.add('current');
+    document.getElementById('master-input').value = "";
+    idx = 0; mistakes = 0; active = false;
+    setTimeout(() => document.getElementById('master-input').focus(), 500);
 }
 
-function focusInput() { input.focus(); }
+function focusInput() { document.getElementById('master-input').focus(); }
 
-input.addEventListener('input', (e) => {
+document.getElementById('master-input').addEventListener('input', (e) => {
     if (!active) startTimer();
-    const spans = display.querySelectorAll('span');
-    const val = input.value.split('');
-    
-    // Backspace Logic
+    const spans = document.getElementById('text-display').querySelectorAll('span');
+    const typed = document.getElementById('master-input').value.split('');
+
     if (e.inputType === "deleteContentBackward") {
         if (idx > 0) {
             idx--;
             spans[idx].className = '';
-            spans.forEach(s => s.classList.remove('current'));
-            spans[idx].classList.add('current');
         }
-        return;
+    } else {
+        const char = typed[typed.length - 1];
+        if (idx < spans.length) {
+            if (char === spans[idx].innerText) {
+                spans[idx].className = 'correct';
+                new Audio(document.getElementById('sfx-key').src).play();
+            } else {
+                spans[idx].className = 'wrong';
+                mistakes++;
+                new Audio(document.getElementById('sfx-error').src).play();
+            }
+            idx++;
+        }
     }
 
-    // Typing Logic
-    const char = val[val.length - 1];
-    if (idx < spans.length) {
-        if (char === spans[idx].innerText) {
-            spans[idx].className = 'correct';
-            playSound('sfx-key');
-        } else {
-            spans[idx].className = 'wrong';
-            mistakes++;
-            playSound('sfx-error');
-        }
-        idx++;
-        spans.forEach(s => s.classList.remove('current'));
-        if (spans[idx]) spans[idx].classList.add('current');
-        updateStats();
-    }
+    spans.forEach(s => s.classList.remove('current'));
+    if (spans[idx]) spans[idx].classList.add('current');
+    
+    // Auto-scroll if text is long
+    if(idx > 20) spans[idx].scrollIntoView({behavior: "smooth", block: "center"});
+    
+    updateStats();
     if (idx === spans.length) end();
 });
-
-function playSound(id) {
-    const s = document.getElementById(id).cloneNode();
-    s.volume = 0.5;
-    s.play().catch(() => {}); // অটো-প্লে ব্লক হ্যান্ডলিং
-}
 
 function startTimer() {
     active = true;
@@ -80,9 +80,14 @@ function startTimer() {
 }
 
 function updateStats() {
-    let wpm = Math.round((idx / 5) / ((time - (parseInt(document.getElementById('timer').innerText.split(':')[0]*60) + parseInt(document.getElementById('timer').innerText.split(':')[1]))) / 60) || 0);
+    let wpm = Math.round((idx / 5) / ((time - getLeftTime()) / 60) || 0);
     document.getElementById('wpm').innerText = wpm;
     document.getElementById('acc').innerText = Math.round(((idx - mistakes) / idx) * 100 || 100) + "%";
+}
+
+function getLeftTime() {
+    const t = document.getElementById('timer').innerText.split(':');
+    return parseInt(t[0]) * 60 + parseInt(t[1]);
 }
 
 function end() {
@@ -92,17 +97,48 @@ function end() {
     document.getElementById('res-acc').innerText = document.getElementById('acc').innerText.replace('%','');
 }
 
+function prepareCertificate() {
+    const name = document.getElementById('user-name').value;
+    if (!name) { alert("Please enter your name first!"); return; }
+    
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('l', 'mm', 'a4');
+
+    // Design
+    doc.setDrawColor(212, 175, 55); doc.setLineWidth(5); doc.rect(5, 5, 287, 200); // Border
+    doc.setLineWidth(1); doc.rect(10, 10, 277, 190); 
+
+    // Header
+    doc.setFont("Cinzel", "bold"); doc.setFontSize(40); doc.setTextColor(184, 134, 11);
+    doc.text("CERTIFICATE OF ACHIEVEMENT", 148, 40, {align: 'center'});
+
+    doc.setFont("Poppins", "normal"); doc.setFontSize(15); doc.setTextColor(0);
+    doc.text("This is to certify that", 148, 60, {align: 'center'});
+
+    // User Name
+    doc.setFont("Dancing Script", "bold"); doc.setFontSize(50); doc.setTextColor(0);
+    doc.text(name, 148, 85, {align: 'center'});
+
+    // Body
+    doc.setFont("Poppins", "normal"); doc.setFontSize(18);
+    doc.text("has successfully completed the Professional Typing Speed Test", 148, 110, {align: 'center'});
+    doc.text(`with an impressive speed of ${document.getElementById('res-wpm').innerText} WPM`, 148, 125, {align: 'center'});
+    doc.text(`and an Accuracy of ${document.getElementById('res-acc').innerText}%`, 148, 135, {align: 'center'});
+
+    // Signatures
+    doc.setDrawColor(0); doc.line(50, 170, 110, 170); doc.line(180, 170, 240, 170);
+    doc.setFont("Dancing Script", "bold"); doc.setFontSize(20);
+    doc.text("Ayan Karmakar", 80, 165, {align: 'center'}); 
+    doc.text("BharatTyping Org.", 210, 165, {align: 'center'});
+
+    doc.setFont("Poppins", "bold"); doc.setFontSize(12);
+    doc.text("CEO & Founder", 80, 175, {align: 'center'});
+    doc.text("Authorized Signatory", 210, 175, {align: 'center'});
+
+    doc.save(`${name}_Typing_Certificate.pdf`);
+}
+
 function goBack(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
-}
-
-function generateCertificate() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('l', 'mm', 'a4');
-    doc.setFillColor(20, 20, 20); doc.rect(0, 0, 297, 210, 'F');
-    doc.setTextColor(247, 129, 102); doc.setFontSize(50); doc.text("BharatTyping Pro 🇮🇳", 148, 70, {align:'center'});
-    doc.setTextColor(255); doc.setFontSize(25); doc.text(`Speed: ${document.getElementById('res-wpm').innerText} WPM`, 148, 110, {align:'center'});
-    doc.text(`Accuracy: ${document.getElementById('res-acc').innerText}%`, 148, 130, {align:'center'});
-    doc.save('pro-certificate.pdf');
 }
