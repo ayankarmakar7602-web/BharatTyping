@@ -1,144 +1,134 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="bn">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Pro Typing Practice</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypingPro - Minimalist Typing Test</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Lexend:wght@400;500;600&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
-
 <body>
 
-
-<div class="container">
-
-
-<h1 class="logo">Pro Typing Practice</h1>
-
-
-
-<!-- SETTINGS -->
-
-<div class="settings">
-
-<select id="language">
-
-<option value="english">English</option>
-<option value="bangla">বাংলা</option>
-<option value="hindi">हिन्दी</option>
-
-</select>
-
-
-<select id="time">
-
-<option value="60">1 Minute</option>
-<option value="180">3 Minutes</option>
-<option value="300">5 Minutes</option>
-
-</select>
-
-
-<button id="startBtn">Start Test</button>
-
-</div>
-
-
-
-<!-- LIVE STATS -->
-
-<div class="stats">
-
-<div class="stat">
-
-<span id="wpm">0</span>
-<p>WPM</p>
-
-</div>
-
-
-<div class="stat">
-
-<span id="accuracy">100</span>
-<p>Accuracy</p>
-
-</div>
-
-
-<div class="stat">
-
-<span id="timer">0</span>
-<p>Time</p>
-
-</div>
-
-
-</div>
-
-
-
-
-<!-- TYPING AREA -->
-
-<div id="typingArea" tabindex="0">
-
-<div id="textDisplay">
-
-Click "Start Test" to begin...
-
-</div>
-
-</div>
-
-
-
-
-<!-- RESULT -->
-
-<div id="resultSection" class="result">
-
-<h2>Typing Result</h2>
-
-<p>Speed: <span id="finalWPM"></span> WPM</p>
-
-<p>Accuracy: <span id="finalAccuracy"></span>%</p>
-
-
-<input id="userName" placeholder="Enter your name for certificate">
-
-
-<button id="downloadCert">Download Certificate</button>
-
-</div>
-
-
-
-</div>
-
-
-
-
-<!-- AUDIO -->
-
-<audio id="keySound"
-src="https://cdn.jsdelivr.net/gh/rohitsathish/key-click@master/key1.mp3"></audio>
-
-<audio id="errorSound"
-src="https://cdn.jsdelivr.net/gh/rohitsathish/key-click@master/key2.mp3"></audio>
-
-
-
-<script src="script.js"></script>
-
+    <div id="app">
+        
+        <header>
+            <div class="logo">
+                <i class="fas fa-keyboard"></i> typing<span class="hl">pro</span>
+            </div>
+            <div class="nav-icons">
+                <button class="icon-btn" title="Settings"><i class="fas fa-cog"></i></button>
+                <button class="icon-btn" title="Profile"><i class="fas fa-user"></i></button>
+            </div>
+        </header>
+
+        <nav id="test-config" class="fade-in">
+            <div class="config-group config-lang">
+                <button class="text-btn active" data-lang="en">english</button>
+                <button class="text-btn" data-lang="bn">bangla</button>
+                <button class="text-btn" data-lang="hi">hindi</button>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="config-group config-time">
+                <button class="text-btn" data-time="60">1 min</button>
+                <button class="text-btn active" data-time="180">3 min</button>
+                <button class="text-btn" data-time="300">5 min</button>
+            </div>
+        </nav>
+
+        <main id="typing-test">
+            
+            <div id="live-stats-header">
+                <div id="timer" class="live-stat">180</div>
+                <div id="live-wpm" class="live-stat hidden">0 wpm</div>
+            </div>
+
+            <div id="typing-container">
+                
+                <div id="focus-overlay" class="hidden">
+                    <i class="fas fa-mouse-pointer"></i> Click here or press any key to focus
+                </div>
+
+                <input type="text" id="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+
+                <div id="words-wrapper">
+                    <div id="caret" class="hidden"></div>
+                    
+                    <div id="words" class="unfocused">
+                        </div>
+                </div>
+            </div>
+
+            <div id="restart-wrapper">
+                <button id="restart-btn" title="Restart Test (Tab + Enter)">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+        </main>
+
+        <section id="results-screen" class="hidden fade-in">
+            <div class="results-header">
+                <div class="stat-box primary-stat">
+                    <div class="stat-title">wpm</div>
+                    <div class="stat-value" id="res-wpm">0</div>
+                </div>
+                <div class="stat-box primary-stat">
+                    <div class="stat-title">acc</div>
+                    <div class="stat-value" id="res-acc">0%</div>
+                </div>
+            </div>
+
+            <div class="results-details">
+                <div class="stat-box sub-stat">
+                    <div class="stat-title">test type</div>
+                    <div class="stat-value" id="res-test-type">time 3 min</div>
+                </div>
+                <div class="stat-box sub-stat">
+                    <div class="stat-title">characters</div>
+                    <div class="stat-value" id="res-chars">0/0/0/0</div> </div>
+                <div class="stat-box sub-stat">
+                    <div class="stat-title">time</div>
+                    <div class="stat-value" id="res-time">180s</div>
+                </div>
+            </div>
+
+            <div class="certificate-form-area">
+                <h3><i class="fas fa-award"></i> Claim Your Certificate</h3>
+                <p>Generate a professional, print-ready PDF certificate for your achievement.</p>
+                <div class="input-group">
+                    <input type="text" id="cert-name" placeholder="Enter your full name (e.g., Ayan Karmakar)">
+                    <button id="download-cert-btn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="icon-text-btn" id="next-test-btn"><i class="fas fa-angle-right"></i> next test</button>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-code"></i> Developer: Ayan</a>
+                <a href="#"><i class="fas fa-palette"></i> Theme</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <audio id="sound-type" src="https://assets.mixkit.co/sfx/preview/mixkit-keyboard-typing-1386.mp3"></audio>
+    <audio id="sound-error" src="https://assets.mixkit.co/sfx/preview/mixkit-click-error-1110.mp3"></audio>
+
+    <script src="script.js"></script>
 </body>
-
 </html>
